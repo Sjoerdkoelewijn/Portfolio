@@ -1,52 +1,64 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
 import React from "react"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
-
-import Header from "./header"
+import { Link } from 'gatsby'
+import { StaticQuery, graphql } from "gatsby"
+import { HelmetDatoCms } from 'gatsby-source-datocms'
 import "./layout.scss"
 
-const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
+const TemplateWrapper = ({ children }) => (
+  <StaticQuery query={graphql`
+    query LayoutQuery
+    {
+      datoCmsSite {
+        globalSeo {
+          siteName
+        }
+        faviconMetaTags {
+          ...GatsbyDatoCmsFaviconMetaTags
         }
       }
+      
+
     }
-  `)
+  `}
+  render={data => (
+    <div className="container">
+      <HelmetDatoCms
+        favicon={data.datoCmsSite.faviconMetaTags}
+      />
+      <div className="container__sidebar">
+        <div className="sidebar">
 
-  return (
-    <>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0px 1.0875rem 1.45rem`,
-          paddingTop: 0,
-        }}
-      >
-        <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
+          
+          <ul className="sidebar__menu">
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+          </ul>
+
+        </div>
       </div>
-    </>
-  )
+      <div className="container__body">
+        <div className="container__mobile-header">
+          <div className="mobile-header">
+            <div className="mobile-header__menu">
+              <Link to="#" data-js="toggleSidebar" />
+            </div>
+
+          </div>
+        </div>
+        {children}
+      </div>
+    </div>
+    )}
+  />
+)
+
+TemplateWrapper.propTypes = {
+  children: PropTypes.object,
 }
 
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-}
-
-export default Layout
+export default TemplateWrapper
