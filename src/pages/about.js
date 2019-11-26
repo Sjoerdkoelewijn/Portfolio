@@ -9,7 +9,7 @@ const About = ({ data: { about } }) => (
     <article className="sheet">
       <HelmetDatoCms seo={about.seoMetaTags} />
       <div className="sheet__inner">
-        <h1 className="sheet__title">{about.title}</h1>
+        <h1 className="sheet__title">{about.name}</h1>
         <p className="sheet__lead">{about.subtitle}</p>
         <div className="sheet__gallery">
           <Img fluid={about.photo.fluid} />
@@ -33,7 +33,7 @@ export const query = graphql`
       seoMetaTags {
         ...GatsbyDatoCmsSeoMetaTags
       }
-      title
+      name
       subtitle
       photo {
         fluid(maxWidth: 600, imgixParams: { fm: "jpg", auto: "compress" }) {
