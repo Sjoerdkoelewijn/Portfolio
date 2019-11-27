@@ -8,14 +8,14 @@ const IndexPage = ({ data }) => (
   <Layout>
 
     <section className="indexheader">
-      <p className="text">
+      <div className="text">
         <div
           className="sheet__body"
           dangerouslySetInnerHTML={{
             __html: data.datoCmsAbout.bioNode.childMarkdownRemark.html,
           }}
         />
-      </p>   
+      </div>   
     </section>
 
     <div className="showcase">

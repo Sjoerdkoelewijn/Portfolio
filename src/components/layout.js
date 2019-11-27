@@ -1,5 +1,4 @@
 import React from "react"
-import PropTypes from "prop-types"
 import { StaticQuery, graphql } from "gatsby"
 import { HelmetDatoCms } from 'gatsby-source-datocms'
 import "../styles/layout.scss"
@@ -11,31 +10,39 @@ const TemplateWrapper = ({ children }) => (
       datoCmsSite {
         globalSeo {
           siteName
+          titleSuffix
+          twitterAccount
+
+          fallbackSeo {
+            title
+            description
+            image {
+              url
+            }
+            twitterCard
+          }
         }
         faviconMetaTags {
           ...GatsbyDatoCmsFaviconMetaTags
         }
       }
-      
 
     }
   `}
   render={data => (
     <div className="container">
+
       <HelmetDatoCms
         favicon={data.datoCmsSite.faviconMetaTags}
+        title={data.datoCmsSite.globalSeo.siteName}
+        description={data.datoCmsSite.globalSeo.fallbackSeo.description}
       />
    
-
       {children}
 
     </div>
     )}
   />
 )
-
-TemplateWrapper.propTypes = {
-  children: PropTypes.object,
-}
 
 export default TemplateWrapper

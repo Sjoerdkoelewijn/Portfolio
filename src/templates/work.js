@@ -21,14 +21,14 @@ export default ({ data }) => (
         <h1 className="hero__title">
           {data.datoCmsWork.title}
         </h1>
-        <p className="hero__excerpt">
+        <div className="hero__excerpt">
           <div
             dangerouslySetInnerHTML={{
               __html: data.datoCmsWork.excerptNode.childMarkdownRemark.html,
           }}
         />
           
-        </p>
+        </div>
 
       </div>
 
