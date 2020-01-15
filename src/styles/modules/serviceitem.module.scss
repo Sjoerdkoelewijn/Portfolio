@@ -1,0 +1,51 @@
+@import "../variables/breakpoints";
+
+.serviceitems {
+    width:80vw;
+    margin:10vh auto;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    z-index:2;
+
+    @include phone {
+        display: block;
+        width:90vw;
+        
+    }
+
+    .serviceitem {
+        margin:8vh 5vw;
+
+        @include phone {
+            margin:0 0 30px 0;
+               
+        }
+
+        .serviceitem__text_title {
+            font-size:1.7rem;
+            font-weight:700;
+
+            @include phone {
+                font-size:2rem;
+                  
+            }
+
+            .serviceitem__text_title_checkicon {
+                margin-right:10px;
+
+                @include phone {
+                    display:none;   
+                }
+            }
+        }
+        
+        .serviceitem__text_excerpt {
+            margin-top:20px;
+            font-size:1.5rem;
+
+            @include phone {
+                font-size:1.5rem;   
+            }
+        }
+    }
+}

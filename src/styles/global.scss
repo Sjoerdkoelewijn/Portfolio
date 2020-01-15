@@ -1,0 +1,293 @@
+@import "./variables/colors";
+@import "./variables/typography";
+@import "./reset";
+@import "./variables/breakpoints";
+@import "./variables/animations";
+
+a {
+    text-decoration: none;
+}
+
+p {
+     a {
+        text-decoration: underline;
+     }
+}
+
+.menu__bg {
+    background:$pink;
+    position:fixed;
+    display:relative;
+    top:62px;
+    right:134px;
+    z-index:1;
+    border-radius:100%;
+    width:0;
+    height:0;
+    overflow:hidden;
+    transition:all .3s ease-out;
+
+    @include phone {
+        top:35px;
+        right:43px;
+
+    }
+}
+
+.menu__bg.true {
+    z-index:9000;
+    width:200vw;
+    height:200vw;
+    top:-100vh;
+    right:-100vh;
+    transition:all .5s ease-in;
+
+    @include phone {
+        width:400vw;
+        height:400vw;
+        top:-200vw;
+        right:-200vw;
+        border-radius:0;
+        
+    }
+}
+
+
+
+.menu__wrap {
+    width:100%;
+    height:100vh;
+    position:fixed;
+    top:0;
+    right:0;
+    visibility:hidden;
+    opacity:0;
+    transition:opacity 1s ease-in;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+
+
+    .menu__wrap_inner{
+        width:50vw;
+        display:flex;
+        position:relative;
+
+        @include phone {
+            width:90vw;
+            display:block;
+            
+        }
+      
+        .menu__sitenav {
+
+            @include phone {
+                margin-top:100px;
+                
+            }
+      
+            .menu__sitenav_link {
+                display:block;
+                color:$white;
+                font-size:2.5rem;
+                font-weight:700;
+                text-align:center;
+                padding:20px 50px;
+                margin:0 0 40px 0;
+
+                @include phone {
+                    font-size:1.8rem;
+                    margin:0 0 20px 0;
+                    padding:10px 30px;
+                    
+                }
+    
+            }
+  
+            a[aria-current="page"], a:hover{
+                background:$white;
+                color:$pink;
+                border-radius:50px;
+                transition:background .5s ease-in;
+
+                @include phone {
+                    background:none;   
+                    color:$white;                 
+                }
+            }
+  
+      }    
+  
+      .menu__right {
+          margin:100px 0 0 10vw;
+  
+          .menu__right_text {
+                color:$white;
+                font-size:1.7rem;
+                font-weight:100;
+                line-height:170%;
+
+                @include phone {
+                    display:none;
+                    
+                }
+          }
+  
+          .menu__socialnav {
+                margin-top:80px;
+
+                @include phone {
+                    display:block;
+                    width:264px;
+                    margin:30px auto 30px auto;
+                }
+
+                .menu__sitenav_link{
+                    width:46px;
+                    height:46px;
+                    display:inline-block;
+                    margin-right:15px;
+                    background: $white;
+                    transition:background .5s ease;
+                    mask-size: cover;
+                
+                    &:hover {
+                        background: $dark-grey;
+                    }
+
+                }
+
+                
+
+                .twitter {
+                    mask:url('../images/Twitter-white.svg') no-repeat;
+                }
+                .linkedin {
+                    mask:url('../images/LinkedIN-white.svg') no-repeat;
+                }
+                .github {
+                    mask:url('../images/Github-white.svg') no-repeat;
+                }
+                .codepen {
+                    mask:url('../images/Codepen-white.svg') no-repeat;
+                }
+        
+              
+          }
+  
+      }
+      
+  }
+  
+  .menu__closebtn {
+        font-size:1.5rem;
+        color:$white;
+        cursor:pointer;
+    
+        position:absolute;
+        top:50px;
+        right:50px;
+
+        @include phone {
+            top:30px;
+            right:35px;
+
+            span {
+                display:none;
+            }
+        }
+  
+        .menu__closebtn_icon {
+            padding:5px 0 0 15px;
+        }
+  
+        &:before {
+            content:'';
+            width:30vw;
+            height:30vw;
+            display:block;
+            background:$white;
+            opacity:.1;
+            border-radius:50%;
+            position:absolute;
+            top:-14vw;
+            right:-12vw;
+            animation: pulse-dot 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) -.4s infinite;
+
+            @include phone {
+                width:50vw;
+                height:50vw;
+                top:-24vw;
+                right:-24vw;
+            }
+        }
+  }
+
+}
+
+.menu__bg.true .menu__wrap {
+  
+  visibility:visible;
+  opacity:1;
+  transition:opacity 1s ease-in;
+}
+
+
+.footer__social {
+    .menu__socialnav {
+        margin-top:30px;
+
+        @include phone {
+            display:block;
+            width:264px;
+            margin:100px auto 30px auto;
+        }
+
+        .menu__sitenav_link {
+            display: inline-block;
+            width: 46px;
+            height: 46px;
+            background: #CECECE;
+            transition:background .5s ease;
+
+            mask-size: cover;
+            margin:0 10px 0 10px;
+
+
+            &:hover {
+                background: $dark-grey;
+            }
+        }
+
+        .twitter {
+            mask:url('../images/Twitter.svg') no-repeat;
+        }
+        .linkedin {
+            mask:url('../images/LinkedIN.svg') no-repeat;
+        }
+        .github {
+            mask:url('../images/Github.svg') no-repeat;
+        }
+        .codepen {
+            mask:url('../images/Codepen.svg') no-repeat;
+        }
+
+      
+  }
+}
+
+.menu__servicenav, .menu__linksnav {
+    margin:20px 0 0 0;
+
+    .menu__sitenav_link {
+        display:block;
+        color:$dark-grey;
+        font-size:1.6rem;
+        font-weight:300;
+        line-height:170%;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

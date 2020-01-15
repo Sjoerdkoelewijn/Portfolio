@@ -1,0 +1,50 @@
+@import "../variables/colors";
+@import "../variables/breakpoints";
+
+.tweet {
+    width:50vw;
+    margin:20vh auto;
+
+    .tweet__screenname {
+        display:block;
+        font-size:2rem;
+        color:$dark-grey;
+    }
+
+    .tweet__text {
+        font-size:5rem;
+        line-height:140%;
+        font-weight:900;
+        margin:5vh 0;
+
+        .tweet__text_url {
+            color:$dark-grey;
+            transition: color .5s ease;
+
+            &:hover {
+                color:$pink;
+                transition: color .5s ease;
+            }
+        }
+        
+
+    }
+    
+    .tweet__urls {
+
+        .tweet__url_icon {
+            margin-right:20px;
+        }
+        
+        .tweet__url {
+            color:$dark-grey;
+            font-size:2.4rem;
+            transition: color .5s ease;
+
+            &:hover {
+                color:$pink;
+                transition: color .5s ease;
+            }
+        }
+    }
+}

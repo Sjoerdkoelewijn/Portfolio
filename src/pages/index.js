@@ -1,21 +1,103 @@
-import React from "react"
-import { Link } from "gatsby"
+import React from "react";
+import Layout from "../components/layout";
+import { graphql } from 'gatsby';
+import WorkItem from "../components/workitem";
+import ServiceItem from "../components/serviceitem";
+import FooterCTA from "../components/footercta";
+import SEO from "../components/seo";
+import styles from "../styles/modules/index.module.scss";
 
-import Layout from "../components/layout"
-import Image from "../components/image"
-import SEO from "../components/seo"
+const IndexPage = ({ data }) => {
+  
+  const mc = data.wordPress.microcopyOptionsSettings;
 
-const IndexPage = () => (
+  return(
+  
   <Layout>
+    
     <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
-)
 
-export default IndexPage
+    <section className={styles.intro}>
+      <h1 className={styles.intro__title}
+        dangerouslySetInnerHTML={{
+          __html: mc.heroheader,
+        }}
+      ></h1>
+    </section>
+
+    <section className={styles.work}>
+
+      <h1 className={styles.intro__title}
+        dangerouslySetInnerHTML={{
+          __html: mc.worktitle,
+        }}
+      ></h1>
+      <h2 className={styles.intro__subtitle}>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: mc.worksubtitle,
+          }}
+        />
+      </h2>
+      <p className={styles.intro__text}>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: mc.worktext,
+          }}
+        />
+      </p>
+
+      <WorkItem />
+
+
+    </section>
+
+    <section className={styles.service}>
+
+        <h1 className={styles.intro__title}
+          dangerouslySetInnerHTML={{
+            __html: mc.servicetitle,
+          }}
+        ></h1>
+        <h2 className={styles.intro__subtitle}
+          dangerouslySetInnerHTML={{
+            __html: mc.worksubtitle,
+          }}
+        ></h2>        
+        <p className={styles.intro__text}>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: mc.servicetext,
+            }}
+          />
+        </p>
+
+        <ServiceItem />
+
+        <FooterCTA />
+
+    </section>  
+    
+  </Layout>
+  
+)}
+
+export const query = graphql`
+query getIndexMicrocopy {
+  wordPress {
+    microcopyOptionsSettings {
+      heroheader
+      worksubtitle
+      worktext
+      worktitle
+      servicesubtitle
+      servicetext
+      servicetitle
+    }
+  }
+}
+
+
+`
+
+export default IndexPage;

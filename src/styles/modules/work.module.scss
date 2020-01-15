@@ -1,0 +1,117 @@
+@import "../variables/colors";
+
+.header {
+    background:$yellow;
+    display: flex;
+    
+    .header__text {
+        width:45vw;
+        margin:35vh 150px 0 80px;
+
+        .header__text_link {
+            text-transform:uppercase;
+            color:$dark-grey;
+            font-size:1.3rem;
+            
+        }
+
+        .header__text_title{
+            margin-top:30px;
+            font-size:5rem;
+            font-weight:600;
+            line-height:130%;
+
+        }
+
+        .header__text_excerpt {
+            font-size:2.4rem;
+            margin-top:20px;
+            
+        }
+
+    }
+
+    .header__image_wrap {
+        width:560px;
+        height:1010px;
+        background:$black;
+        display:inline-block;
+        //position:absolute;
+        margin-top:30vh;
+        border-radius: 40px;
+        position:relative;
+
+        &:after {
+            content:'';
+            width:30px;
+            height:100px;
+            display:block;
+            position: absolute;
+            background:$black;
+            right:-10px;
+            top:150px;
+        }
+        
+        .header__image {
+            width:500px;
+            height:950px;
+            margin:30px 0 0 30px;
+            
+            border-radius: 20px;
+                        
+        }
+
+    }
+    
+
+}
+
+.bodytext {
+    margin:20vh 0 20vh 0;
+
+    .bodytext__title {
+        text-align:center;
+        font-size:4.8rem;
+
+        margin-top:20vh;
+
+        &:after {
+            content:'.';
+            color:$pink;
+        }
+    }
+    
+    .bodytext__subtitle {
+        text-align:center;
+        font-size:2.5rem;
+        margin-top:20px;
+        color:$blue;
+    }
+    
+    .bodytext__paragraph {
+        width:60vw;
+        margin:50px auto 50px auto;
+        font-size:2.3rem;
+    }
+
+    .bodytext__learning_quote {
+        font-size:4.5rem;
+        font-weight:900;
+        line-height:150%;
+        color:$white;
+        padding:20vh 20vw;
+        background:$pink;
+        margin:20vh 0;
+    }
+
+}
+
+
+.desktop__image {
+    width:65vw;
+    margin:20vh auto;
+
+    border:40px solid $yellow;
+    border-radius:30px;
+    box-shadow: 5px 7px 20px rgba(166, 166, 166, 0.3);
+}
