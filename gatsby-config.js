@@ -60,7 +60,7 @@ module.exports = {
         typeName: 'WordPress',
         fieldName: 'wordPress',
         url: 'https://api.sjoerdkoelewijn.com/graphql',
-        refetchInterval: 60,
+        //refetchInterval: 60,
       },
     },
 
