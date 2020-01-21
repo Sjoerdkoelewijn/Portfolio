@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import Header from "../components/header";
 import Footer from "./footer";
 import OverlayMenu from '../components/menu';
 import Burger from '../components/burger';
+import Anime from 'react-anime';
 
 const Layout = ({ children }) => {
  
@@ -13,16 +13,22 @@ const Layout = ({ children }) => {
     setMenuOpen(!menuOpen);
   };
   
+  let animeProps = {
+    opacity: [0, 1],
+  };
 
   return (
     <>
-      <Header />
-      <Burger handleOverlayMenu={handleOverlayMenu} />
-      
-        <main id="main" role="main">
-          {children}
-        </main>
-        <Footer />
+        <Burger handleOverlayMenu={handleOverlayMenu} />
+        
+        <Anime {...animeProps} >
+                           
+          <main id="main" role="main">
+            {children}
+          </main>
+          <Footer />
+
+        </Anime>
       <OverlayMenu menuOpen={menuOpen} callback={handleOverlayMenu} />
     </>
   )

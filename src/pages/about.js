@@ -2,15 +2,24 @@ import React from "react";
 import Layout from "../components/layout";
 import { graphql } from 'gatsby';
 import SEO from "../components/seo";
+import Header from "../components/header";
 import ServiceItem from "../components/serviceitem";
 import Tweets from "../components/tweets";
 import FooterCTA from "../components/footercta";
 import styles from "../styles/modules/about.module.scss";
 import Img from "gatsby-image";
+import Anime from 'react-anime';
 
 export default ({ data }) => {
   
   const page = data.wordPress.pageBy;
+
+  let textAnimeProps = {
+    opacity: [0,1],
+    translateY: ['20vh', 0],
+    easing: 'easeOutElastic(5, .9)',
+    duration: 600,
+  };
 
   return(
 
@@ -22,6 +31,8 @@ export default ({ data }) => {
 
     }
 
+    <Header classProp="dark" />
+
     <div class={styles.featured__image_wrap}>
 
       {page.featuredImage &&
@@ -31,28 +42,30 @@ export default ({ data }) => {
       }
 
     </div>
+    
+    <Anime {...textAnimeProps} >
+      <section className={styles.content}>
+          
+          {page.title &&
+            <h1 className={styles.title}
+            dangerouslySetInnerHTML={{
+              __html: page.title,
+            }}
+            ></h1>
+          }
 
-    <section className={styles.content}>
-        
-        {page.title &&
-          <h1 className={styles.title}
-          dangerouslySetInnerHTML={{
-            __html: page.title,
-          }}
-          ></h1>
-        }
-
-        {page.content &&
-          <p className={styles.body}>
-            <div
-                dangerouslySetInnerHTML={{
-                  __html: page.content,
-              }}
-            />
-          </p>
-        }
-        
-    </section>
+          {page.content &&
+            <p className={styles.body}>
+              <div
+                  dangerouslySetInnerHTML={{
+                    __html: page.content,
+                }}
+              />
+            </p>
+          }
+          
+      </section>
+    </Anime>
 
     <section className={styles.service}>
 

@@ -2,12 +2,15 @@ import React from "react";
 import Layout from "../components/layout";
 import WorkItem from "../components/workitem";
 import SEO from "../components/seo";
-import styles from "../styles/modules/index.module.scss";
+import Header from "../components/header";
+import styles from "../styles/modules/work.module.scss";
 
 const IndexPage = () => (
   <Layout>
     
-    <SEO title="Work Portfolio" />
+    <SEO title="Design & Development Portfolio" description="Check out the casestudies my design and development portfolio." />
+
+    <Header classProp="dark" />
 
      <section className={styles.work}>
 
@@ -24,7 +27,6 @@ const IndexPage = () => (
       </p>
 
       <WorkItem />
-
 
     </section>
     

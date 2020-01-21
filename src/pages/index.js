@@ -2,14 +2,23 @@ import React from "react";
 import Layout from "../components/layout";
 import { graphql } from 'gatsby';
 import WorkItem from "../components/workitem";
+import Header from "../components/header";
 import ServiceItem from "../components/serviceitem";
 import FooterCTA from "../components/footercta";
 import SEO from "../components/seo";
 import styles from "../styles/modules/index.module.scss";
+import Anime from 'react-anime';
 
 const IndexPage = ({ data }) => {
   
   const mc = data.wordPress.microcopyOptionsSettings;
+
+  let textAnimeProps = {
+    opacity: [0,1],
+    translateY: ['20vh', 0],
+    easing: 'easeOutElastic(5, .9)',
+    duration: 600,
+  };
 
   return(
   
@@ -17,12 +26,16 @@ const IndexPage = ({ data }) => {
     
     <SEO title="Home" />
 
+    <Header classProp="white" />
+
     <section className={styles.intro}>
-      <h1 className={styles.intro__title}
-        dangerouslySetInnerHTML={{
-          __html: mc.heroheader,
-        }}
-      ></h1>
+      <Anime {...textAnimeProps} >
+        <h1 className={styles.intro__title}
+          dangerouslySetInnerHTML={{
+            __html: mc.heroheader,
+          }}
+        ></h1>
+      </Anime>
     </section>
 
     <section className={styles.work}>
@@ -39,12 +52,11 @@ const IndexPage = ({ data }) => {
           }}
         />
       </h2>
-      <p className={styles.intro__text}>
-        <div
+      <p className={styles.intro__text}
           dangerouslySetInnerHTML={{
             __html: mc.worktext,
           }}
-        />
+        >
       </p>
 
       <WorkItem />

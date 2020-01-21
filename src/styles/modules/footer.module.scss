@@ -5,9 +5,34 @@
     display:flex;
     width:90vw;
     margin:20vh auto;
+
+    @include small-laptop {
+        flex-wrap:wrap;
+    }    
+    
+    @include phone {
+       flex-direction: column;
+    }
+
+    .footer__top_title {
+
+        @include large-phone {
+            font-size:2rem;
+        }
+
+    }
     
     .footer__top_contact {
-        width:43%;
+        width:42%;
+
+        @include small-laptop {
+            width:90vw;
+        }
+
+        @include large-phone {
+            width:90vw; 
+                      
+        }
 
         .footer__top_contact_info {
             white-space: pre-wrap;
@@ -15,80 +40,39 @@
             font-weight:300;
             margin:20px 0;
             line-height:170%;
+
+            @include phone {
+                font-size:1.4rem;           
+            }
         }
     }
 
     .footer__top_services {
-        width:35%;
+        width:30%;
+        margin-right:5%;
+
+        @include small-laptop {
+            width:60%;
+            margin-top:50px;
+        }
+
+        @include large-phone {
+            width:90vw;
+            margin-top:20px;              
+        }
     }
 
     .footer__top_links {
         width:22%;
-    }
-}
 
-.footer__bottom {
-    background:$light-grey;
-    padding:4vw;
-
-    display:flex;
-    justify-content: space-between;
-
-    @include phone {
-        display:block;
-    }
-
-    .footer__logo {
-        display:flex;
-        
-        @include phone {
-            display:block;
-            padding:50px 0 0 0;
-        }
-        
-        .footer__logo_icon {
-            width:123px;
-            margin-right:10px;
+        @include small-laptop {
             
-            filter: invert(.8);
-
-            @include phone {
-                width:100px;
-                margin:20px auto;
-                display:block;
-            }
+            margin-top:50px;
         }
 
-        .footer__logo_text {
-            display:block;
-
-            .footer__logo_title {
-                font-size:2.4rem;
-                font-weight:900;
-                margin:5px 0 0 0;
-
-                @include phone {
-                    text-align:center;
-                    font-size:2.2rem;
-                    margin:30px 0 0 0;
-                }
-    
-            }
-    
-            .footer__logo_subtitle {
-                font-size:1.4rem;
-                font-weight:400;
-                color:#B8B8B8;
-                margin:10px 0 0 10px;
-                
-                @include phone {
-                    text-align:center;
-                    margin:15px 0 0 10px;
-                }
-    
-            }
+        @include large-phone {
+            width:90vw;
+            margin-top:40px;              
         }
-        
     }
-
 }

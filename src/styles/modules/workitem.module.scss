@@ -5,33 +5,37 @@
     width:100%;
     display:block;
     margin:35vh 0 0 0;
+    
+    @include phone {
+        margin-top:20vh;
+    }
 
     .workitem {
-        background:$blue;
+        background:$blue-gradient;
         text-align:center;
         padding:20vh 0;
         margin-bottom:36vh;
-        color:white;
+        color:$white;
+        text-shadow:$text-shadow-blue;
 
         .workitem__image {
-            max-width:1000px;
-            margin:-36vh auto 0 auto;
+            max-width:1200px;
+            margin:-45vh auto 0 auto;
 
-            border:40px solid $blue;
             border-radius:30px;
 
             box-shadow: 5px 7px 20px rgba(0, 116, 135, 0.3);
 
             @include phone {
-                border:20px solid $blue;
-                max-width:80vw;
+                margin-top:-30vh;
+                max-width:90vw;
             }
         }
        
         .workitem__text {
             width:40vw;
             margin:10vh auto;
-
+            
             @include phone {
                 width:90vw;
                 margin:8vh auto;
@@ -43,10 +47,6 @@
                 text-transform:uppercase;
                 margin-bottom:40px;
                 
-                @include phone {
-                    font-size:1.6rem;
-                    margin-bottom:25px;
-                }
             }
             
             .workitem__text_title {
@@ -79,6 +79,7 @@
             &:hover {
                 background:$white;
                 color:$blue;
+                text-shadow: none;
                 transition:all .5s ease-out;
             }
         }
@@ -87,6 +88,7 @@
             background:$white;
             margin-bottom:20vh;
             color:$dark-grey;
+            text-shadow:none;
             
             .workitem__image{
                 border-color:$white;
@@ -105,8 +107,9 @@
         }
 
         &:nth-child(3) {
-            background:$pink;   
+            background:$pink-gradient;  
             color:$white;
+            text-shadow:$text-shadow-pink;
 
             .workitem__image{
                 border-color:$pink;

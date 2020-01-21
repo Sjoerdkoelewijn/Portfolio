@@ -1,9 +1,10 @@
 import React from "react"
 import { graphql } from "gatsby"
+import FooterCTA from "../components/footercta";
 import Layout from "../components/layout"
 import Img from "gatsby-image";
+import Header from "../components/header";
 import styles from "../styles/modules/work.module.scss";
-
 
 export default ({ data }) => {
   
@@ -12,7 +13,11 @@ export default ({ data }) => {
   return(
 
   <Layout>
+
+    <Header classProp="white" />
+
     <section className={styles.header}>
+      
       <div className={styles.header__text}>
         
         {post.work_fields.name &&
@@ -38,8 +43,10 @@ export default ({ data }) => {
         }
         
       </div>
-      <div className={styles.header__image_wrap}>  
-        <Img className={styles.header__image} fluid={post.work_fields.phoneImage.imageFile.childImageSharp.fluid} alt={post.work_fields.phoneImage.altText} />
+      <div className={styles.header__image_wrap}>
+        <div className={styles.header__image_border}>
+          <Img className={styles.header__image} fluid={post.work_fields.phoneImage.imageFile.childImageSharp.fluid} alt={post.work_fields.phoneImage.altText} />
+        </div>  
       </div>  
     </section>
 
@@ -166,12 +173,8 @@ export default ({ data }) => {
       
 
     </div>
-    
 
-
-
-
-
+    <FooterCTA />
 
   </Layout>
 )}

@@ -1,17 +1,53 @@
 @import "../variables/colors";
+@import "../variables/breakpoints";
+
+.work__title {
+    text-align:center;
+    padding-top:25vh;
+
+    &:after {
+        content:'.';
+        color:$pink;
+    }
+}
+
+.work__subtitle {
+    text-align:center;
+    font-size:2.5rem;
+    margin-bottom:30px;
+    font-weight: 600;
+
+    @include phone {
+        font-size:1.8rem;
+    }
+
+}
 
 .header {
-    background:$yellow;
+    background:$blue-gradient;
     display: flex;
     
     .header__text {
-        width:45vw;
-        margin:35vh 150px 0 80px;
+        color:$white;
+        text-shadow:$text-shadow-blue;
+        width:50%;
+        margin:35vh 150px 15vh 80px;
+
+        @include phone {
+            width:90vw;
+            margin:20vh auto 10vh auto;
+        }
 
         .header__text_link {
             text-transform:uppercase;
-            color:$dark-grey;
-            font-size:1.3rem;
+            color:$white;
+            font-size:1.5rem;
+            font-weight:100;
+            
+            @include phone {
+                font-weight:400;
+                font-size:1.2rem;
+            }
             
         }
 
@@ -21,45 +57,67 @@
             font-weight:600;
             line-height:130%;
 
+            @include phone {
+                margin-top:20px;
+                font-size:3rem;
+            }
+
         }
 
         .header__text_excerpt {
             font-size:2.4rem;
             margin-top:20px;
+
+            @include phone {
+                font-size:1.6rem;
+                line-height: 150%;
+                font-weight:400;
+            }
             
         }
 
     }
 
     .header__image_wrap {
-        width:560px;
-        height:1010px;
-        background:$black;
-        display:inline-block;
-        //position:absolute;
-        margin-top:30vh;
-        border-radius: 40px;
-        position:relative;
+        margin-top:25vh;
+        width:40%;
 
-        &:after {
-            content:'';
-            width:30px;
-            height:100px;
-            display:block;
-            position: absolute;
-            background:$black;
-            right:-10px;
-            top:150px;
+        @include phone {
+            display:none;
+        }
+
+        .header__image_border {
+            width:560px;
+            height:1040px;
+            background:$white;
+            display:inline-block;
+            position:absolute;
+            border-radius: 40px;
+            box-shadow: 5px 7px 20px rgba(166, 166, 166, 0.3); 
+
+            &:after {
+                content:'';
+                width:30px;
+                height:100px;
+                display:block;
+                position: absolute;
+                background:$white;
+                right:-10px;
+                top:150px;
+            }
+
+            .header__image {
+                width:500px;
+                height:950px;
+                margin:60px 0 0 30px;
+                
+                border-radius: 20px;
+                            
+            }
+
         }
         
-        .header__image {
-            width:500px;
-            height:950px;
-            margin:30px 0 0 30px;
-            
-            border-radius: 20px;
-                        
-        }
+        
 
     }
     
@@ -67,13 +125,23 @@
 }
 
 .bodytext {
-    margin:20vh 0 20vh 0;
+    margin:25vh 0 20vh 0;
+
+    @include phone {
+        width:90vw;
+        margin:20vh auto 15vh auto;
+    }
 
     .bodytext__title {
         text-align:center;
         font-size:4.8rem;
-
         margin-top:20vh;
+
+        @include phone {
+            margin-top:10vh;
+            font-size:3rem;
+            text-align:left;
+        }
 
         &:after {
             content:'.';
@@ -85,13 +153,24 @@
         text-align:center;
         font-size:2.5rem;
         margin-top:20px;
-        color:$blue;
+
+        @include phone {
+            font-size:1.8rem;
+            text-align:left;
+        }
     }
     
     .bodytext__paragraph {
         width:60vw;
         margin:50px auto 50px auto;
         font-size:2.3rem;
+
+        @include phone {
+            font-size:1.5rem;
+            width:90vw;
+            margin:30px auto 0 auto;
+            text-align:left;
+        }
     }
 
     .bodytext__learning_quote {
@@ -100,18 +179,32 @@
         line-height:150%;
         color:$white;
         padding:20vh 20vw;
-        background:$pink;
+        background:$pink-gradient;
         margin:20vh 0;
+
+        @include phone {
+            width:105vw;
+            margin:10vh 0 0 -10vw;
+            border:0;
+            font-size:2rem;
+            padding:10vh 10vw;
+            box-sizing: border-box;
+        }
     }
 
 }
-
 
 .desktop__image {
     width:65vw;
     margin:20vh auto;
 
-    border:40px solid $yellow;
+    border:40px solid $white;
     border-radius:30px;
     box-shadow: 5px 7px 20px rgba(166, 166, 166, 0.3);
+
+    @include phone {
+        width:90vw;
+        border:0;
+        margin:10vh auto 0 auto;
+    }
 }

@@ -22,7 +22,6 @@ const OverlayMenu = ({ menuOpen, callback }) => {
     `)
     return(
 
-
     <div className={`menu__bg ${menuOpen}`}>
 
         <div className={`menu__wrap`}>

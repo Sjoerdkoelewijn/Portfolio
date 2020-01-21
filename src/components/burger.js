@@ -8,7 +8,6 @@ const Burger = ({ handleOverlayMenu }) => {
   return (
     <div className={styles.menu__openbtn} role="button" aria-label="menu" onClick={handleOverlayMenu} tabIndex="0" onKeyDown={handleOverlayMenu}>
         <img className={styles.menu__openbtn_icon}  src={MenuIcon} alt="Menu" />
-        <span>Menu</span>
     </div>
   )
   
