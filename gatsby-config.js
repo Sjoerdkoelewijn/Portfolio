@@ -46,7 +46,7 @@ module.exports = {
       resolve: `gatsby-plugin-scroll-indicator`,
       options: {
         // Configure color of the scroll indicator
-        color: '#FFDB59',
+        color: '#32B5CA',
         // Configure paths where the scroll indicator will appear
         paths: ['/', '/about/', '/work/**'],
         // Configure the z-index of the indicator element
@@ -78,8 +78,8 @@ module.exports = {
         name: `gatsby-starter-default`,
         short_name: `starter`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
+        background_color: `#32B5CA`,
+        theme_color: `#32B5CA`,
         display: `minimal-ui`,
         icon: `src/images/logo-icon.png`, // This path is relative to the root of the site.
       },

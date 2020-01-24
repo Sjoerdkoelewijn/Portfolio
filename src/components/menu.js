@@ -2,7 +2,7 @@ import React from 'react';
 import { useStaticQuery, graphql, Link } from "gatsby"
 import CloseIcon from '../images/close-icon.svg';
 import SocialMenu from './socialmenu';
-import Anime, {anime} from 'react-anime';
+import Anime from 'react-anime';
 
 const OverlayMenu = ({ menuOpen, callback }) => {
     const data = useStaticQuery(graphql`
@@ -43,7 +43,7 @@ const OverlayMenu = ({ menuOpen, callback }) => {
                         translateX={['20vw', 0]}
                         easing='easeOutElastic(5, .5)'
                         duration={400}
-                        delay= {anime.stagger(300)}                                
+                        delay= {(el, index) => index * 300}                                
                         >  
                 
                         {data.wordPress.menuItems.nodes.map(node => {
