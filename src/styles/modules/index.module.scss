@@ -1,30 +1,106 @@
 @import "../variables/colors";
 @import "../variables/breakpoints";
 
-.intro {
-    background:$blue-gradient;
+.hero {
     display:flex;
-    justify-content: center;
-    padding-bottom:20vh;
+    margin-bottom:20vh;
+    background:$light-gradient;
+    margin:8vh;
 
-    .intro__title {
-        white-space: pre-line;
-        margin-top:30vh;
-        color:$white;
-        text-shadow:$text-shadow-blue;
-        font-size:4.8vw;
-        line-height:140%;
-        width:50vw;
-
-        @include phone {
-            margin-top:25vh;
-            font-size: 15vw; 
-            width:90vw;
-        }
-        
+    @include phone {
+        margin:0;
     }  
 
-}
+    .hero__intro {
+        position:relative;
+        width:55%;
+        color:$dark;
+
+        @include large-phone {
+            width:100%;
+            min-height:85vh;
+        }
+
+        @include phone {
+            min-height:100vh;
+        }
+    
+        .intro__title {
+            //padding-top:30vh;
+            margin:30vh 0 10px 10vh;
+            font-size:4.3vw;
+            line-height:140%;
+            width:50vw;
+            z-index:5;
+
+            &:after {
+                content:'.';
+                color:$pink;
+            }
+
+            @include large-phone {
+                font-size:3rem;
+                width:70%;
+            }
+
+            @include phone {
+                margin:25vh 0 10px 30px;
+                font-size:3.5rem;
+                width:90%;                
+            }        
+        }
+        
+        .intro__text {
+            margin:0 0 40px 10vh;
+            width:70%;
+            font-size:2.7rem;
+
+            @include small-laptop {
+                font-size:1.8rem;
+            }
+
+            @include phone {
+                font-size:2rem;
+                width:90%;
+                margin:0 0 50px 30px;
+            }
+        }
+
+        .intro__cta {
+            display: flex;            
+            margin:0 0 0 10vh;
+            font-size:1.2rem;
+            color:$dark;
+
+            svg {
+                margin-right:10px;
+            }
+
+            @include phone {
+                margin:0 0 0 30px;
+            }
+        }
+
+    }
+
+    .hero__image_wrap {
+        width:45%;
+        overflow:hidden;
+
+        @include large-phone {
+            display:none;
+        }
+
+        .hero__image {
+            width:100%;
+            height:100vh;
+            background-position:center;
+        }
+    }
+
+ }
+
+
 
 .work, .service {
     display:flex;

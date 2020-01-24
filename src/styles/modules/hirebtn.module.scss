@@ -1,22 +1,21 @@
 @import "../variables/colors";
 @import "../variables/breakpoints";
 
-.menu__openbtn {
+.hire__btn {
     font-size:1.5rem;
     color:$dark-grey;
-    cursor:pointer;
     position:absolute;
     top:50px;
-    left:50px;
+    right:50px;
     z-index:10;
 
     @include phone {
-        top:30px;
-        left:30px;
+        top:26px;
+        right:30px;
+
     }
 
     svg {
-        margin-right:10px;
+        margin:0 10px 0 0;
     }
-
 }

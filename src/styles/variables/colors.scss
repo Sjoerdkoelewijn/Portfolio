@@ -5,12 +5,21 @@ $pink-gradient:linear-gradient(146.29deg, #FF5C97 9.75%, rgba(254, 88, 98, 0) 82
 $yellow:#FFDB59;
 $yellow-gradient:linear-gradient(143.51deg, rgba(255, 255, 255, 0) 7.42%, rgba(242, 160, 0, 0.33) 84.45%), #FFDB59;
 $white:#ffffff;
-$dark-grey:#333333;
+$dark-grey:#050041;
 $light-grey:#F2F2F2;
 $black:#000000;
 
 $text-shadow-blue:0px 1px 2px rgba(0, 138, 160, 0.3);
 $text-shadow-pink:0px 1px 2px rgba(138, 6, 30, 0.3);
+
+
+$dark:#050041;
+$light-gradient: linear-gradient(124.63deg, rgba(255, 255, 255, 0) 2.78%, rgba(202, 211, 214, 0.5) 99.3%), #E9FBFF;
+
+
+
+
+
 
 html {
   color:$dark-grey;
