@@ -2,17 +2,15 @@ require('dotenv').config()
 
 module.exports = {
   siteMetadata: {
-    title: `Sjoerd Koelewijn Portfolio`,
-    description: `I am Sjoerd Koelewijn. A freelance designer and developer based in Amsterdam. I design and build websites for people like you.`,
-    author: `@sjoerdkoelewijn`,
-    siteUrl: `https://sjoerdkoelewijn.com`,
+    title: 'Sjoerd Koelewijn Portfolio',
+    description: 'I am Sjoerd Koelewijn. A freelance designer and developer based in Amsterdam. I design and build websites for people like you.',
+    author: '@sjoerdkoelewijn',
+    siteUrl: 'https://sjoerdkoelewijn.com',
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sass`,
-    `gatsby-transformer-remark`,
     `gatsby-plugin-sitemap`,
-    `gatsby-plugin-offline`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -46,24 +44,13 @@ module.exports = {
       resolve: `gatsby-plugin-scroll-indicator`,
       options: {
         // Configure color of the scroll indicator
-        color: '#32B5CA',
+        color: '#FE5862',
         // Configure paths where the scroll indicator will appear
         paths: ['/', '/about/', '/work/**'],
         // Configure the z-index of the indicator element
         zIndex: 9999,
       },
     },
-    
-    {
-      resolve: `gatsby-source-graphql`,
-      options: {
-        typeName: 'WordPress',
-        fieldName: 'wordPress',
-        url: 'https://api.sjoerdkoelewijn.com/graphql',
-        //refetchInterval: 60,
-      },
-    },
-
     {
       resolve: `gatsby-plugin-offline`,
       options: {
@@ -71,15 +58,22 @@ module.exports = {
       },
     },   
     `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
+    {
+      resolve: `gatsby-plugin-sharp`,
+      options: {
+        useMozJpeg: false,
+        stripMetadata: true,
+        defaultQuality: 80,
+      },
+    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `sjoerd-koelewijn-portfolio`,
+        short_name: `portfolio`,
         start_url: `/`,
-        background_color: `#32B5CA`,
-        theme_color: `#32B5CA`,
+        background_color: `#E9FBFF`,
+        theme_color: `#E9FBFF`,
         display: `minimal-ui`,
         icon: `src/images/logo-icon.png`, // This path is relative to the root of the site.
       },
@@ -95,5 +89,33 @@ module.exports = {
         ],
       },
     },
+    {
+	
+      resolve: 'gatsby-source-prismic-graphql',
+    
+        options: {
+    
+          repositoryName: process.env.REPO_NAME, // (REQUIRED, replace with your own)
+    
+          accessToken: process.env.ACCESS_TOKEN, // (optional API access token)
+    
+          path: '/preview', // (optional preview path. Default: /preview)
+    
+          previews: true, // (optional, activated Previews. Default: false)
+
+          pages: [{ // (optional, builds pages dynamically)
+	
+            type: 'Portfolio_item',         // TypeName from prismic
+      
+            match: '/portfolio/:uid',  // Pages will be generated under this pattern
+      
+            path: '/portfolio/item',        // Placeholder page for unpublished documents
+      
+            component: require.resolve('./src/templates/portfolio_item.js'),
+
+          }],    
+        
+      }    
+    }
   ],
 };

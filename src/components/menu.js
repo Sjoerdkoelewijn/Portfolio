@@ -1,114 +1,139 @@
-import React from 'react';
-import { useStaticQuery, graphql, Link } from "gatsby"
-import CloseIcon from '../images/close-icon.svg';
-import SocialMenu from './socialmenu';
-import Anime from 'react-anime';
+import React, { useState } from 'react';
+import { useStaticQuery, graphql, Link } from "gatsby";
+import { RichText } from "prismic-reactjs";
+import styles from "../styles/modules/menu.module.scss";
+import BurgerIcon from "../components/icons/burgerIcon";
+import HireIcon from "../components/icons/hireIcon";
+import OverlayMenu from "../components/overlayMenu";
+import LinkResolver from "../utils/linkResolver";
+import { Location } from '@reach/router'
 
-const OverlayMenu = ({ menuOpen, callback }) => {
+const Menu = ( props ) => {
     const data = useStaticQuery(graphql`
     query getMenu{
-        wordPress {
-            menuItems(where: {location: MAIN_NAVIGATION}) {
-                nodes {
-                    label
-                    url
+        prismic {
+            allMain_menus {
+                edges {
+                    node {
+                        link {
+                            ... on PRISMIC_About {
+                            _meta {
+                                uid
+                                type
+                            }
+                            }
+                            ... on PRISMIC_Services_item {
+                            _meta {
+                                uid
+                                type
+                            }
+                            }
+                            ... on PRISMIC_Home {
+                            _meta {
+                                uid
+                                type
+                            }
+                            }
+                            ... on PRISMIC_Categories {
+                            _meta {
+                                uid
+                                type
+                            }
+                            }
+                            ... on PRISMIC_Portfolio_item {
+                            _meta {
+                                uid
+                                type
+                            }
+                            }
+                        }
+                        close
+                        hire
+                        menu
+                        main_menu {
+                            link {
+                            ... on PRISMIC_Home {
+                                _meta {
+                                uid
+                                type
+                                }
+                                intro_title
+                            }
+                            ... on PRISMIC_Services_item {
+                                _meta {
+                                uid
+                                type
+                                }
+                                title
+                            }
+                            ... on PRISMIC_Categories {
+                                _meta {
+                                uid
+                                }
+                                title
+                            }
+                            ... on PRISMIC_About {
+                                _meta {
+                                uid
+                                }
+                                title
+                            }
+                            ... on PRISMIC_Portfolio_item {
+                                _meta {
+                                uid
+                                }
+                                title
+                            }
+                            }
+                        }
+
+                    }
                 }
-            }
-            microcopyOptionsSettings {
-                menutext  
             }
         }
     }
 
     `)
-    return(
 
-    <div className={`menu__bg ${menuOpen}`}>
+    const [menuOpen, setMenuOpen] = useState(false);
 
-        <Anime 
-        opacity={[0,1]}
-        translateY={['-100vh', 0]}
-        easing='linear'
-        duration={200}
-        >  
-        
-            <div className={`menu__wrap`}>
+    const handleOverlayMenu = () => {
+        setMenuOpen(!menuOpen);
+      }
 
-                <div className={`menu__wrap_inner`}>
+    const doc = data.prismic.allMain_menus.edges.slice(0,1).pop();
+    if (!doc) return null;
 
-                    <nav className={`menu__sitenav`}>
+    return (
 
-                        <Anime 
-                        opacity={[0,1]}
-                        translateX={['20vw', 0]}
-                        easing='easeOutElastic(5, .5)'
-                        duration={400}
-                        delay= {(el, index) => index * 300}                                
-                        >  
+    <>
+
+    <div className={styles.menu}>
+
+        <div className={styles.menu_btn} onClick={handleOverlayMenu}>
+            <BurgerIcon />
+            {RichText.render(doc.node.menu)}
+        </div>
+
+        {location.pathname !== '/contact' &&
+
+            <Link to={LinkResolver(doc.node.link._meta)} className={styles.hire_btn}>
+                <HireIcon />
+                {RichText.render(doc.node.hire)}
                 
-                        {data.wordPress.menuItems.nodes.map(node => {
+            </Link>
 
-                            const wpurl = `https://api.sjoerdkoelewijn.com`
-                            const onlyPath = node.url.replace(wpurl, ``)
-
-                            return (
-                                
-                                    <Link key={node.id} aria-label={node.label} to={`/${onlyPath}/`} className={`menu__sitenav_link`}>
-                                        {node.label}
-                                    </Link>
-
-                                
-                            )
-                        })}
-
-                    </Anime>  
-
-                    </nav>
-
-                    <Anime 
-                        opacity={[0,1]}
-                        translateX={['100vw', 0]}
-                        easing='easeOutElastic(5, 1.5)'
-                        duration={400}
-                        delay= {1200}
-                        > 
-
-                        <div className={`menu__right`}>
-                            
-                            <p className={`menu__right_text`}>
-                                <div
-                                    dangerouslySetInnerHTML={{
-                                        __html: data.wordPress.microcopyOptionsSettings.menutext,
-                                    }}
-                                />
-                            </p>
-
-                            <SocialMenu />
-                        
-                        </div>
-
-                    </Anime>
-
-                </div>
-
-                
-                <div className={`menu__closebtn`} role="button" aria-label="close" onClick={callback} tabIndex="0" onKeyDown={callback}>
-                    <span>Close</span>
-                    <img className={`menu__closebtn_icon`} src={CloseIcon} alt="Close menu" />
-                </div>
-
-               
-
-            </div>
-
-        </Anime>
-
+        }
+       
     </div>
 
-    
+    <OverlayMenu menuOpen={menuOpen} callback={handleOverlayMenu} />    
+
+    </>
 
     )
 }
 
 
-export default OverlayMenu 
+
+export default Menu 

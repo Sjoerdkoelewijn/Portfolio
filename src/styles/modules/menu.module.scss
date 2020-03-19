@@ -1,0 +1,286 @@
+@import "../variables/colors";
+@import "../variables/breakpoints";
+@import "../variables/typography";
+@import "../variables/spacing";
+
+.menu {
+    width:calc(100% + 60px);
+    display:flex;
+    justify-content:space-between;
+    margin:-40px 0 8vw -40px;
+
+    @include large-laptop {
+        width:100%;
+        margin:0 0 8vw 0;
+    }
+    
+    p {
+        font-size:var(--small-p);
+        font-weight:400;
+        display:inline;
+        margin-left:10px;
+    }
+
+    .menu_btn {
+        cursor:pointer;
+
+        svg {
+            rect {
+                fill:$action;
+                transition:all .5s ease-in-out;
+            }                
+        }
+
+        &:hover { 
+            svg {
+                rect {
+                    transition:all .5s ease-in-out;
+                    fill:$primary;
+                }                
+            }  
+        }
+
+    }
+
+   .hire_btn {
+        text-decoration:none;
+        color:$primary;
+                
+        svg {
+
+            path, circle {
+                transition:all .5s ease-in-out;
+            }
+            
+        }
+
+        &:hover {
+
+            svg {
+                path, circle {
+                    fill:$primary;
+                    transition:all .5s ease-in-out;
+                }
+            }
+        }
+    }
+}
+
+.overlay_menu {
+    background:$primary;
+    color:$white;
+    width:100%;
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:9999;
+    height:100vh;
+    overflow:hidden;
+    
+    .overlay_menu_inner {
+        padding:calc(9vw - 20px) 9vw 9vw calc(9vw - 20px);
+        box-sizing: border-box;
+        height:100vh;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+
+        @include large-phone {
+            flex-direction: column;
+            padding:0;           
+        }
+
+        .main_menu {
+            width:30%;
+            display:flex;
+            align-items: center;
+            flex-direction: column;
+
+            @include large-phone {
+                width:80%;           
+            }
+
+            .menu_link {
+                color:$white;
+                text-decoration: none;
+                font-weight:600;
+                font-size:1.8rem;
+                margin-bottom:30px;
+                display:inline-block;
+                text-align:center;
+                margin-bottom:70px;
+
+                @include phone {
+                    margin-bottom:50px;           
+                } 
+
+                &:hover {
+                    color:$action;
+                }
+            }
+
+            a[aria-current="page"] {
+                background:$white;
+                border-radius:50px;
+                padding:20px 50px;
+                color:$action;
+                cursor: default;
+                pointer-events: none;
+            }
+
+        }
+
+        .text_area {
+            width:40%;           
+
+            @include large-phone {
+                width:auto;           
+            }
+
+            p {
+                font-size:var(--small-p);
+                line-height:170%;
+                width:100%;
+
+                @include large-phone {
+                    display:none;           
+                }
+            }
+
+            .social_menu {
+                margin-top:var(--vertical-spacing-l);
+
+                @include large-phone {
+                    width:280px;
+                    margin-top:var(--vertical-spacing-s);           
+                }
+
+                @include phone {
+                    position:absolute;
+                    bottom:40px;
+                    width:276px;
+                    left:0;
+                    right:0;
+                    margin-left:auto;
+                    margin-right:auto;       
+                }                
+        
+                .social_icon {
+                    margin-right:30px;
+                    
+                    svg {
+                        path {
+                            fill:$white;
+                            transition:fill .5s ease;
+                        }
+                    }
+        
+                    &:hover {
+                        svg {
+                            path {
+                                fill:$action;
+                                transition:fill .5s ease;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    
+        .close_btn {
+            position:fixed;
+            top:50px;
+            right:80px;
+            display:flex;
+            color:$white;
+            text-decoration:none;
+            cursor:pointer;
+            transition:all .5s ease-in-out;
+            
+            @include large-phone {
+                top:20px;
+                right:40px;       
+            }
+
+            p {
+                font-size:var(--small-p);
+                font-weight:400;
+                display:inline;
+                margin-left:10px;
+            }
+
+            svg {
+                width:20px;
+                height:20px; 
+                margin-top:9px;
+
+                @include large-phone {
+                    width:17px;
+                    height:17px; 
+                    margin-top:9px;       
+                }
+
+                rect {
+                    transition:all .5s ease-in-out;
+                }
+            }
+
+            &:hover {
+                color:$action;
+                transition:all .5s ease-in-out;
+
+                svg {
+                    rect {
+                        fill:$action;
+                        transition:all .5s ease-in-out;
+                    }
+                }
+            }
+
+            &:after {
+                content:'';
+                width:40vw;
+                height:40vw;
+                background:$white;
+                border-radius:50%;
+                opacity:.1;
+                position:absolute;
+                right:-20vw;
+                top:-20vw;
+                transition:all .5s ease-in-out;
+
+                @include large-phone {
+                    display:none;           
+                }
+            }
+
+            &:hover {
+                &:after {
+                    width:25vw;
+                    height:25vw;
+                    right:-11vw;
+                    top:-13vw;
+                    opacity:.05;
+                    transition:all .5s ease-in-out;
+                }
+            }
+        }
+    
+    }
+
+    
+}
+
+.overlay_menu.false {
+    height:0;
+    transition:all .2s ease;
+
+    .close_btn {
+        display:none;
+    }
+}
+
+.overlay_menu.true {
+    height:100vh;
+    transition:all .4s ease;    
+}

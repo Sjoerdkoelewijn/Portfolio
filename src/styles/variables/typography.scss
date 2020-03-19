@@ -1,18 +1,130 @@
 @import "../variables/colors";
 @import "../variables/breakpoints";
 
+@include UHD {
+    :root {
+
+        --large-title:5rem;
+        --normal-title:4rem;
+        --small-title:3.5rem;
+    
+        --large-subtitle:2.8rem;
+        --normal-subtitle:2.2rem;
+        --small-subtitle:1.8rem;
+    
+        --large-p:2.6rem;
+        --normal-p:2.2rem;
+        --small-p:1.8rem;
+
+    }
+}
+
+:root {
+
+    --large-title:5rem;
+    --normal-title:4rem;
+    --small-title:3.5rem;
+
+    --large-subtitle:2.8rem;
+    --normal-subtitle:2.2rem;
+    --small-subtitle:1.8rem;
+
+    --large-p:2.6rem;
+    --normal-p:2.2rem;
+    --small-p:1.6rem;
+
+    --quote-size:4rem;
+
+}
+
+
+
+@include large-laptop {
+    :root {
+
+        --large-title:5rem;
+        --normal-title:4rem;
+        --small-title:3.5rem;
+    
+        --large-subtitle:4rem;
+        --normal-subtitle:2.2rem;
+        --small-subtitle:1.8rem;
+
+        --large-p:2.2rem;
+        --normal-p:1.8rem;
+        --small-p:1.5rem;
+
+    }
+}
+
+@include small-laptop {
+    :root {
+
+        --large-title:5rem;
+        --normal-title:3.5rem;
+        --small-title:3.5rem;
+    
+        --large-subtitle:4rem;
+        --normal-subtitle:2.2rem;
+        --small-subtitle:1.8rem;
+
+        --large-p:2.2rem;
+        --normal-p:1.6rem;
+        --small-p:1.4rem;
+
+        --quote-size:3rem;
+
+    }
+}
+
+@include large-phone {
+    :root {
+
+        --large-title:5rem;
+        --normal-title:2.8rem;
+        --small-title:2.2rem;
+    
+        --large-subtitle:4rem;
+        --normal-subtitle:2.2rem;
+        --small-subtitle:1.8rem;
+
+        --large-p:2.2rem;
+        --normal-p:1.6rem;
+        --small-p:1.4rem;
+
+        --quote-size:2.5rem;
+
+    }
+}
+
+@include phone {
+    :root {
+
+        --large-title:5rem;
+        --normal-title:2.5rem;
+        --small-title:1.8rem;
+    
+        --large-subtitle:4rem;
+        --normal-subtitle:1.8rem;
+        --small-subtitle:1.6rem;
+
+        --large-p:2.2rem;
+        --normal-p:1.6rem;
+        --small-p:1.4rem;
+
+        --quote-size:1.5rem;
+
+    }
+}
+
+
 html {
     font-family: 'Heebo', sans-serif; 
 }
 
-input::placeholder, textarea::placeholder {
+input, textarea, input::placeholder, textarea::placeholder {
     font-family: 'Heebo', sans-serif; 
     font-weight:100;
-}
-
-input, textarea {
-    font-family: 'Heebo', sans-serif;
-    font-weight:100; 
 }
 
 button {
@@ -25,46 +137,40 @@ strong {
 
 h1 {
     font-weight:600;
-    line-height:150%;
-    font-size:4.5vw;
+    line-height:140%;
+    font-size:var(--normal-title);
+    margin-bottom:30px;
 
-    @include phone {
-        font-size: 3rem; 
-    }    
+    &:after {
+        content:'.';
+        color:$action;
+    }   
 }
 
 h2 {
-    font-weight:900;
+    font-weight:700;
     line-height:150%;
-    font-size:4.5vw;
+    font-size:var(--normal-subtitle);
+    margin-bottom:30px;
+}
 
-    @include phone {
-        font-size: 3rem; 
-    }
+h1 + h2 {
+   margin-top:-15px; // Adjacent sibling selector - Move h2 up when it follows a h1
 }
 
 h3 {
     font-weight:700;
     line-height:150%;
-    font-size:2.8rem;
-
-    @include phone {
-        font-size: 1.7rem; 
-    }
-}
-
-h4 {
-    font-weight:700;
-    line-height:150%;
-    font-size:2rem;
-
-    @include phone {
-        font-size: 1.1rem; 
-    }
+    font-size:var(--small-subtitle);
 }
 
 p{
-    line-height:170%; 
+    line-height:160%; 
     font-weight:100;
-    font-size:1.5rem;
+    font-size:var(--normal-p);
+    margin-bottom:50px;   
+    
+    @include large-phone {
+        margin-bottom:30px;           
+    }
 }

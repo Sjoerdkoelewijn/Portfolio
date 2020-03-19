@@ -1,220 +1,148 @@
-import React, { useState } from "react";
+import React from "react";
+import { graphql, Link } from "gatsby";
 import Layout from "../components/layout";
-import { graphql } from 'gatsby';
-import WorkItem from "../components/workitem";
-import ServiceItem from "../components/serviceitem";
-import FooterCTA from "../components/footercta";
-import SEO from "../components/seo";
-import styles from "../styles/modules/index.module.scss";
-import Anime from 'react-anime';
-import Burger from '../components/burger';
-import Hire from '../components/hirebtn';
+import { RichText } from "prismic-reactjs";
 import BackgroundImage from 'gatsby-background-image';
-import OverlayMenu from '../components/menu';
+import styles from "../styles/modules/index.module.scss";
+import portfolioStyles from "../styles/modules/portfolio.module.scss";
+import Menu from "../components/menu";
+import ServicesOverview from "../components/services";
 
 const IndexPage = ({ data }) => {
 
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const handleOverlayMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
+  const hero = data.prismic.allHomes.edges.slice(0,1).pop();
+  if (!hero) return null;
   
-  const mc = data.wordPress.microcopyOptionsSettings;
+  const cat = data.prismic.allCategoriess.edges.slice(0,1).pop();
+  if (!cat) return null;
 
-    return(
-  
-  <Layout>
-    
-    <SEO title="Home" />
+  return (
+    <Layout>
+      <article className={styles.hero}>
 
-    <OverlayMenu menuOpen={menuOpen} callback={handleOverlayMenu} />
+        <div className={styles.text_area}>
+          <Menu />
+          {RichText.render(hero.node.intro_title)}
+          {RichText.render(hero.node.intro_excerpt)}
+        </div>
 
-    <div className={styles.hero}>
-
-      <article className={styles.hero__intro}>
-
-        <Anime 
-          opacity={[0,1]} 
-          translateX={['-20vw', 0]}
-          easing='easeOutElastic(5, .9)'
-          duration={600}
-          delay={400} 
-        >
-
-          <Burger handleOverlayMenu={handleOverlayMenu} />
-
-        </Anime>
-
-        <Anime 
-          opacity={[0,1]} 
-          translateX={['20vw', 0]}
-          easing='easeOutElastic(5, .9)'
-          duration={600}
-          delay={400} 
-        > 
-
-          <Hire />
-
-        </Anime>
-
-        
-
-        <Anime 
-          opacity={[0,1]} 
-          translateY={['20vh', 0]}
-          easing='easeOutElastic(5, .9)'
-          duration={600} 
+        <BackgroundImage 
+          Tag="section"
+          className={styles.hero_image}
+          fluid={hero.node.intro_imageSharp.childImageSharp.fluid}
+          backgroundColor={`#9CDEF2`}
           >
-          <h1 className={styles.intro__title}
-            dangerouslySetInnerHTML={{
-              __html: mc.herotitle,
-            }}
-          ></h1>
-        </Anime>
-
-        <Anime 
-          opacity={[0,1]} 
-          translateY={['20vh', 0]}
-          easing='easeOutElastic(5, .9)'
-          duration={600}
-          delay={400} 
-          >
-          <p className={styles.intro__text}
-            dangerouslySetInnerHTML={{
-              __html: mc.heroheader,
-            }}
-          ></p>
-        </Anime>
-
-        <Anime 
-          opacity={[0,1]} 
-          translateY={['20vh', 0]}
-          easing='easeOutElastic(5, .9)'
-          duration={600}
-          delay={800} 
-          >
-            
-          <a href="#work" className={styles.intro__cta}>
-            <svg width="12" height="18" viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5 8.74224e-08L5 14.17L1.41 10.59L0 12L6 18L12 12L10.59 10.59L7 14.17L7 0L5 8.74224e-08Z" fill="#FE5862"/>
-            </svg>
-
-            <div dangerouslySetInnerHTML={{
-                __html: mc.herocta,
-              }} 
-            />          
-          </a>
-
-        </Anime>
+        </BackgroundImage>
 
       </article>
 
-      {data.wordPress.pageBy.featuredImage &&
-          
-        <div className={styles.hero__image_wrap}>
+      <article className={portfolioStyles.portfolio}>
 
-          <BackgroundImage
-            Tag="section"
-            className={styles.hero__image} 
-            fluid={data.wordPress.pageBy.featuredImage.imageFile.childImageSharp.fluid}
-            backgroundColor={`#040e18`}
-          >
-          </BackgroundImage>
+        <div className={portfolioStyles.intro_text}>  
+
+          {RichText.render(cat.node.title)}
+          {RichText.render(cat.node.subtitle)}
+          {RichText.render(cat.node.excerpt)}
 
         </div>
 
-      }
+        <div className={portfolioStyles.portfolio_inner}>
 
-    </div>
+          {data.prismic.allPortfolio_items.edges.map(portfolio => {
 
-    <article name="work" className={styles.work}>
+            let slug = `/portfolio/${portfolio.node._meta.uid}`;
 
-      <h1 className={styles.intro__title}
-        dangerouslySetInnerHTML={{
-          __html: mc.worktitle,
-        }}
-      ></h1>
-      <h2 className={styles.intro__subtitle}>
-        <div
-          dangerouslySetInnerHTML={{
-            __html: mc.worksubtitle,
-          }}
-        />
-      </h2>
-      <p className={styles.intro__text}
-          dangerouslySetInnerHTML={{
-            __html: mc.worktext,
-          }}
-        >
-      </p>
+            return (
+              <article className={portfolioStyles.portfolio_block}>
+                
+                <Link to={slug} className={portfolioStyles.link}>
 
-      <WorkItem />
+                  <BackgroundImage 
+                    Tag="section"
+                    className={portfolioStyles.image}
+                    fluid={portfolio.node.main_imageSharp.childImageSharp.fluid}
+                    backgroundColor={`#f2f2f2`}
+                    >
+                  </BackgroundImage>
+                
+                </Link>  
+
+                <Link to={slug} className={portfolioStyles.link}>
+                  {RichText.render(portfolio.node.title)}
+                </Link>
+
+                {RichText.render(portfolio.node.subtitle)}
+
+              </article>
+            );
+
+          })}
+
+        </div>
+
+      </article>
 
 
-    </article>
+      <article className={styles.services}>
 
-    <article className={styles.service}>
+        <ServicesOverview />
 
-        <h1 className={styles.intro__title}
-          dangerouslySetInnerHTML={{
-            __html: mc.servicetitle,
-          }}
-        ></h1>
-        <h2 className={styles.intro__subtitle}
-          dangerouslySetInnerHTML={{
-            __html: mc.worksubtitle,
-          }}
-        ></h2>        
-        <p className={styles.intro__text}>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: mc.servicetext,
-            }}
-          />
-        </p>
+      </article>
 
-        <ServiceItem />
-
-        <FooterCTA />
-
-    </article>  
-    
-  </Layout>
-  
-)}
+    </Layout>
+  );
+};
 
 export const query = graphql`
-query getIndexMicrocopy {
-  wordPress {
-    pageBy(uri: "about")  {
-      featuredImage {
-        altText
-        sourceUrl
-        imageFile {
-        childImageSharp {
-            fluid(maxWidth: 1000, quality: 100) {
-                ...GatsbyImageSharpFluid
+  query getIndex {
+    prismic {
+      allHomes {
+        edges {
+          node {
+            intro_excerpt
+            intro_title
+            intro_image
+            intro_imageSharp {
+                childImageSharp {
+                  fluid(quality: 100, maxWidth: 960) {
+                    ...GatsbyImageSharpFluid_withWebp
+                  }
+                }
             }
+          }
+        }
+      }
+      allPortfolio_items {
+        edges {
+          node {
+            title
+            subtitle
+            main_image
+            main_imageSharp {
+                childImageSharp {
+                  fluid(quality: 100, maxWidth: 960) {
+                    ...GatsbyImageSharpFluid_withWebp
+                  }
+                }
             }
+            _meta {
+              uid
+              type
+            }
+          }
+        }
+      }
+      allCategoriess(uid: "portfolio") {
+        edges {
+          node {
+            title
+            subtitle
+            excerpt
+          }
         }
       }
     }
-    microcopyOptionsSettings {
-      herotitle
-      heroheader
-      herocta
-      worksubtitle
-      worktext
-      worktitle
-      servicesubtitle
-      servicetext
-      servicetitle
-    }
   }
-}
-
-
-`
+`;
 
 export default IndexPage;

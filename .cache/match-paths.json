@@ -1,0 +1,18 @@
+[
+    {
+        "path": "/portfolio/de-kopse-waard",
+        "matchPath": "/portfolio/de-kopse-waard"
+    },
+    {
+        "path": "/portfolio/hash-museum",
+        "matchPath": "/portfolio/hash-museum"
+    },
+    {
+        "path": "/portfolio/thomas-kessens",
+        "matchPath": "/portfolio/thomas-kessens"
+    },
+    {
+        "path": "/portfolio/item",
+        "matchPath": "/portfolio/:uid"
+    }
+]

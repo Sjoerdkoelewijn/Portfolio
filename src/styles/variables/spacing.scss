@@ -1,0 +1,74 @@
+@include UHD {
+    :root {
+
+        --margin:5vw;
+        --padding:6vw;
+    
+        --vertical-spacing-s:30px;
+        --vertical-spacing-m:50px;
+        --vertical-spacing-l:100px;       
+
+    }
+}
+
+:root {
+
+    --margin:4vw;
+    --padding:5vw;
+
+    --vertical-spacing-s:30px;
+    --vertical-spacing-m:50px;
+    --vertical-spacing-l:100px;
+
+}
+
+@include large-laptop {
+    :root {
+
+        --margin:5vw;
+        --padding:5vw;
+    
+        --vertical-spacing-s:20px;
+        --vertical-spacing-m:40px;
+        --vertical-spacing-l:80px;     
+
+    }
+}
+
+@include small-laptop {
+    :root {
+
+        --margin:5vw;
+        --padding:6vw;
+    
+        --vertical-spacing-s:30px;
+        --vertical-spacing-m:50px;
+        --vertical-spacing-l:100px;    
+
+    }
+}
+
+@include large-phone {
+    :root {
+
+        --margin:7vw;
+        --padding:7vw;
+    
+        --vertical-spacing-s:30px;
+        --vertical-spacing-m:50px;
+        --vertical-spacing-l:100px;      
+
+    }
+}
+
+@include phone {
+    :root {
+
+        --margin:5vw;
+        --padding:6vw;
+    
+        --vertical-spacing-s:30px;
+        --vertical-spacing-m:50px;
+        --vertical-spacing-l:100px;
+    }
+}

@@ -1,78 +1,133 @@
 @import "../variables/colors";
 @import "../variables/breakpoints";
+@import "../variables/typography";
 
-.footer__top {
+.footer {
+    background:$secondary-gradient;
+    margin:var(--margin);
+    padding:var(--padding);
     display:flex;
-    width:90vw;
-    margin:20vh auto;
+    justify-content:space-between;
 
-    @include small-laptop {
-        flex-wrap:wrap;
-    }    
-    
-    @include phone {
-       flex-direction: column;
+    @include large-phone {
+        display:block;           
     }
 
-    .footer__top_title {
-
-        @include large-phone {
-            font-size:2rem;
+    .contact {
+        strong{
+            font-size:75%;
         }
-
     }
-    
-    .footer__top_contact {
-        width:42%;
 
-        @include small-laptop {
-            width:90vw;
-        }
+    .services {
+        text-align:right;
 
         @include large-phone {
-            width:90vw; 
-                      
+            text-align:left;           
         }
 
-        .footer__top_contact_info {
-            white-space: pre-wrap;
-            font-size:1.6rem;
-            font-weight:300;
-            margin:20px 0;
-            line-height:170%;
+        a {
+            display:block;
+            line-height:170%; 
+            font-weight:100;
+            font-size:var(--small-p);
+           
+        }
+    }
 
-            @include phone {
-                font-size:1.4rem;           
+    .social {
+        margin-top:100px;
+        text-align:right;
+
+        @include large-phone {
+            text-align:left;           
+        }
+
+        .social_icon {
+            margin-left:30px;
+
+            @include large-phone {
+                margin:0 30px 0 0;           
+            }
+            
+            svg {
+                path {
+                    transition:fill .5s ease;
+                }
+            }
+
+            &:hover {
+                svg {
+                    path {
+                        fill:$action;
+                        transition:fill .5s ease;
+                    }
+                }
             }
         }
     }
 
-    .footer__top_services {
-        width:30%;
-        margin-right:5%;
-
-        @include small-laptop {
-            width:60%;
-            margin-top:50px;
-        }
-
-        @include large-phone {
-            width:90vw;
-            margin-top:20px;              
+    .copyright {
+        margin-top:30px;
+        
+        p {
+            font-size:1.2rem;
         }
     }
 
-    .footer__top_links {
-        width:22%;
+    .page_links {
+        text-align:right;
+        margin-top:-40px;
 
-        @include small-laptop {
+        @include large-phone {
+            text-align:left;
+            margin-top:-20px;           
+        }
+
+        .link {
+            font-size:1.2rem;
+            font-weight:100;
+            transition:color .3s ease;
             
-            margin-top:50px;
-        }
+            &:after {
+                margin:0 10px;
+                content:"|";
 
-        @include large-phone {
-            width:90vw;
-            margin-top:40px;              
+            }
+
+            &:hover:after {
+                color:$primary;
+            }
+
+            &:last-child:after {
+                margin:0;
+                content:"";
+            }
+
+            &:hover {
+                color:$action;
+                transition:color .3s ease;
+            }
         }
     }
+
+    h2 {
+        font-size:2.2rem;
+        margin-bottom:15px;
+    }
+
+    a {
+        text-decoration:none;
+        
+        p {
+            margin:5px 0;
+        }
+    }
+
+    p {
+        font-size:var(--small-p);
+        line-height:170%;
+
+        
+    }    
 }

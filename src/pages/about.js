@@ -1,119 +1,148 @@
 import React from "react";
+import { graphql, Link } from "gatsby";
 import Layout from "../components/layout";
-import { graphql } from 'gatsby';
-import SEO from "../components/seo";
-import Header from "../components/header";
-import ServiceItem from "../components/serviceitem";
-import Tweets from "../components/tweets";
-import FooterCTA from "../components/footercta";
+import { RichText, Date} from "prismic-reactjs";
 import styles from "../styles/modules/about.module.scss";
-import Img from "gatsby-image";
-import Anime from 'react-anime';
+import Menu from "../components/menu";
+import BackgroundImage from 'gatsby-background-image';
 
-export default ({ data }) => {
+const AboutPage = ({ data }) => {
+
+  const doc = data.prismic.about;
+	if (!doc) return null;
   
-  const page = data.wordPress.pageBy;
+  return (
+    <Layout>
 
-  let textAnimeProps = {
-    opacity: [0,1],
-    translateY: ['20vh', 0],
-    easing: 'easeOutElastic(5, .9)',
-    duration: 600,
-  };
+      <article className={styles.hero}>
 
-  return(
+        <div className={styles.text_area}>
+          <Menu />
+          {RichText.render(doc.title)}
+          {RichText.render(doc.intro)}
+        </div>
 
-  <Layout>
+        <BackgroundImage 
+          Tag="section"
+          className={styles.hero_image}
+          fluid={doc.imageSharp.childImageSharp.fluid}
+          backgroundColor={`#9CDEF2`}
+          >
+        </BackgroundImage>
 
-    {page.seo.title &&
+      </article>
 
-      <SEO title={page.seo.title} description={page.seo.metaDesc} />
+      <article className={styles.jobs_skills_wrap}>
 
-    }
+        <div className={styles.skills}>
+        
+          {doc.body.map(slice => {
 
-    <Header classProp="dark" />
+            if (slice.type === 'skills')
 
-    <div class={styles.featured__image_wrap}>
+            return slice.fields.map(skill => {
 
-      {page.featuredImage &&
-      
-        <Img className={styles.featured__image} fluid={page.featuredImage.imageFile.childImageSharp.fluid} alt="alt text" />
+              return (
+                <div className={styles.skill} >
+                  {RichText.render(skill.skill_title)}
+                  {RichText.render(skill.skill_text)}
+                </div>
+              )
 
-      }
+            });
+            
+          })}
 
-    </div>
-    
-    <Anime {...textAnimeProps} >
-      <section className={styles.content}>
+        </div>
+
+        <div className={styles.jobs}>
+
+          <h1 className={styles.mobileHeader}>Work Experience</h1>
           
-          {page.title &&
-            <h1 className={styles.title}
-            dangerouslySetInnerHTML={{
-              __html: page.title,
-            }}
-            ></h1>
-          }
+          {doc.body.map(slice => {
 
-          {page.content &&
-            <p className={styles.body}>
-              <div
-                  dangerouslySetInnerHTML={{
-                    __html: page.content,
-                }}
-              />
-            </p>
-          }
-          
-      </section>
-    </Anime>
+            if (slice.type === 'job_timeline')
 
-    <section className={styles.service}>
+            return slice.fields.map(function (job, index) {
 
-        <h2 className={styles.intro__title}>
-          {`What can I do for you?`}
-        </h2>
-        <p className={styles.intro__text}>
-          {`
-          I’m an all-round web professional with a lot of experience.
-          I specialize in creating high-quality, bespoke websites. From first concept sketches to finished products.
-          `}
-        </p>
+              const startDate = Date(job.start_date);
+              const formattedStartDate = Intl.DateTimeFormat('en-US',{
+                year: 'numeric',
+                month: 'long'
+              }).format(startDate);
 
-        <ServiceItem />
+              const endDate = Date(job.end_date);
+              const formattedEndDate = Intl.DateTimeFormat('en-US',{
+                year: 'numeric',
+                month: 'long'
+              }).format(endDate);
 
-    </section>  
+              let realDate = (index === 0) ? 'Present' : formattedEndDate; 
 
-    <Tweets />
+              return (
+                <div className={styles.job}>
 
-    <FooterCTA />
+                  <h3 className={styles.title}>
+                    {job.job_title}
+                  </h3>
+                  <div className={styles.date}>
+                    {formattedStartDate} - {realDate}
+                  </div>
+                  <div className={styles.company_city}>
+                    {job.company} | {job.city}
+                  </div>
 
-  </Layout>
-)}
+                </div>
+              )
 
+            });
+            
+          })}
+
+        </div>        
+
+      </article>  
+
+    </Layout>
+  );
+};
 
 export const query = graphql`
-query getAboutPage {
-  wordPress {
-    pageBy(uri: "about")  {
-      title
-      seo {
-        metaDesc
+  query getAbout {
+    prismic {
+      about(uid: "about", lang: "en-us") {
         title
-      }
-      featuredImage {
-        altText
-        sourceUrl
-        imageFile {
-          childImageSharp {
-              fluid(maxWidth: 1000, quality: 100) {
-                  ...GatsbyImageSharpFluid
+        intro
+        image
+          imageSharp {
+              childImageSharp {
+                fluid(quality: 100, maxWidth: 960) {
+                  ...GatsbyImageSharpFluid_withWebp
+                }
               }
+          }
+        body {
+          ... on PRISMIC_AboutBodySkills {
+            type
+            fields {
+              skill_text
+              skill_title
+            }
+          }
+          ... on PRISMIC_AboutBodyJob_timeline {
+            fields {
+              city
+              company
+              end_date
+              job_title
+              start_date
+            }
+            type
           }
         }
       }
-      content(format: RENDERED)
-      }
+    }
   }
-}
+`;
 
-`
+export default AboutPage;

@@ -1,0 +1,300 @@
+@import "../variables/colors";
+@import "../variables/breakpoints";
+@import "../variables/typography";
+@import "../variables/spacing";
+
+// The hero on the portfolio detail pages.
+.hero {
+    background:$secondary-gradient;
+    margin:var(--margin);
+    display:flex;
+
+    .header {
+        margin-top:30px;
+        font-size:var(--small-title);
+        line-height:130%;
+    }
+    
+    .website {
+        text-transform:uppercase;
+        text-decoration:none;
+        font-size:1.25rem;
+        font-weight:500;
+
+        @include large-phone {
+            font-size:1rem;           
+        }
+
+        &:hover {
+            color:$action;
+        }
+    }
+
+    .text_area {
+        width:50%;
+        padding:5vw;
+        //box-sizing: border-box;
+        display:block;
+
+        @include large-phone {
+            width:100%;
+        }
+    }
+   
+    .meta {
+        font-size:1.5rem;
+        font-weight:300;
+        line-height: 300%;
+
+        @include large-phone {
+            font-size:1.3rem;           
+        }
+
+        strong {
+            width:100px;
+            display: inline-block;
+        }
+
+        .service_links {
+
+            .service_link {
+                text-decoration:none;
+
+                &:hover {
+                    color:$action;
+                }
+    
+                &:after {
+                    content:' & ';
+                    color:$primary;
+                }
+
+                &:last-child {
+        
+                    &:after {
+                        content:'';
+                    }
+                }
+            }
+          
+        }        
+    }
+
+    .hero_image {
+        width:50%;
+
+        @include large-phone {
+            display:none;            
+        }
+    }
+}
+
+// Main content on the portfolio detail pages.
+
+.main_content {
+
+    .text_area {
+        margin:calc(var(--margin) + var(--padding));
+
+        h2 {
+            font-weight:600;
+            line-height:150%;
+            font-size:var(--normal-title);
+            margin-bottom:15px;
+
+            &:after {
+                content:'.';
+                color:$action;
+            }
+          
+        }
+
+        h3 {
+            margin-bottom:50px; 
+        }
+
+    }
+
+    .image_area {
+        margin:9vw 4vw 9vw 9vw;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 3vw;
+        max-width: 100%;
+
+        @include large-phone {
+            margin-bottom:150px;          
+        }
+        
+        @include large-phone {
+            display:block;
+            max-width:82%;          
+        }
+
+        .introduction_image {
+            box-shadow: 5px 7px 20px rgba(166, 166, 166, 0.3);
+            max-width: 100%;
+
+            @include large-phone {
+                margin-top:100px;          
+            }
+            
+            &:nth-child(1) {
+                grid-area: 1 / 1 / 2 / 2;
+            }
+
+            &:nth-child(2) {
+                grid-area: 1 / 2 / 3 / 3;                    
+            }
+            
+            &:nth-child(3) {
+                grid-area: 2 / 1 / 3 / 2;
+                margin-top:5px;
+
+                @include large-phone {
+                    margin-top:100px;          
+                }
+            }
+
+        }
+
+    }
+    
+    .quote_area {
+        background:$secondary-gradient;
+        font-size:var(--quote-size);
+        font-weight:900;
+        line-height:150%;
+        margin:var(--margin);
+        padding:10vw 15vw;
+    }
+    
+}
+
+// This is the component used on the homepage and portfolio category page
+
+.portfolio { 
+    
+    .intro_text {
+        margin:calc(var(--margin) + var(--padding));
+
+        p {
+            width:60%;
+
+            @include small-laptop {
+                width:75%;
+            }
+    
+            @include large-phone {
+                width:95%;            
+            }
+        }
+    }
+
+    .hero {
+        background:$secondary-gradient;
+        padding-bottom:20vh;
+
+        .intro_text {
+            padding:var(--padding); // used on the portfolio category page
+            margin:0; // resets the margin that is used on the homepage
+        }
+    }
+
+    --grid-gap:4vw; // made it into a variable because its value is also used to calculate the portfolio block width.
+    
+    .portfolio_inner.portfolio_category {
+        margin-top:-25vh;
+    } 
+
+    .portfolio_inner {
+        margin:calc(var(--margin) + var(--padding));
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-gap: 30px var(--grid-gap);
+
+        @include large-phone {
+            display:block;            
+        }
+        
+
+        .portfolio_block {
+            width:calc(((100vw - ((var(--margin) + var(--padding)) * 2 )) - var(--grid-gap) ) / 2 );
+
+            @include large-phone {
+                width:calc(100vw - ((var(--margin) + var(--padding)) * 2 ));            
+            }
+            
+            h1 {
+                font-size:var(--small-subtitle);
+                font-weight:900;
+                margin-bottom:10px;
+            }
+
+            h2 {
+                font-size:var(--small-p);
+                font-weight:300;
+            }
+
+            a {
+                text-decoration: none;
+            }
+
+            .image {
+                width:100%;
+                margin-bottom:30px;
+            }
+
+            @include large-phone {
+                margin-bottom:80px;            
+            }
+          
+            // the first image is landscape
+            &:nth-child(1) {
+                grid-area: 1 / 1 / 2 / 2;
+
+                .image {
+                    height:23vw;
+
+                    @include large-phone {
+                        height:60vw;            
+                    }
+                }
+
+            }
+
+            // the second image is portrait
+            &:nth-child(2) {
+                grid-area: 1 / 2 / 3 / 3;
+                
+                .image {
+                    height:50vw;
+
+                    @include large-phone {
+                        height:60vw;            
+                    }
+                }
+
+            }
+            
+            // the third image is square
+            &:nth-child(3) {
+                grid-area: 2 / 1 / 3 / 2;
+                margin-top:-5vw;
+
+                .image {
+                    height:40vw;
+
+                    @include large-phone {
+                        height:60vw;            
+                    }
+                }
+
+            }
+            
+        }
+
+    }
+
+}
