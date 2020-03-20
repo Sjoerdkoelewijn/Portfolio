@@ -2,20 +2,46 @@ require('dotenv').config()
 
 module.exports = {
   siteMetadata: {
-    title: 'Sjoerd Koelewijn Portfolio',
-    description: 'I am Sjoerd Koelewijn. A freelance designer and developer based in Amsterdam. I design and build websites for people like you.',
-    author: '@sjoerdkoelewijn',
-    siteUrl: 'https://sjoerdkoelewijn.com',
+    title: `Sjoerd Koelewijn Portfolio`,
+    description: `I am Sjoerd Koelewijn. A freelance designer and developer based in Amsterdam. I design and build websites for people like you.`,
+    author: `@sjoerdkoelewijn`,
+    siteUrl: `https://sjoerdkoelewijn.com`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-sass`,
-    `gatsby-plugin-sitemap`,
+    `gatsby-transformer-remark`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
         path: `${__dirname}/src/images`,
+      },
+    },
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,    
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `sjoerd-koelewijn-portfolio`,
+        short_name: `portfolio`,
+        start_url: `/`,
+        background_color: `#E9FBFF`,
+        theme_color: `#E9FBFF`,
+        display: `minimal-ui`,
+        icon: `src/images/icon.png`, // This path is relative to the root of the site.
+      },
+    },
+    `gatsby-plugin-sass`,
+    `gatsby-plugin-sitemap`,
+    {
+      resolve: 'gatsby-plugin-prefetch-google-fonts',
+      options: {
+        fonts: [
+          {
+            family: 'Heebo',
+            variants: ['300', '400', '500', '800', '900'],
+          },
+        ],
       },
     },
     {
@@ -52,63 +78,25 @@ module.exports = {
       },
     },
     {
+	    resolve: 'gatsby-source-prismic-graphql',
+      options: {
+        repositoryName: process.env.REPO_NAME, // (REQUIRED, replace with your own)
+        accessToken: process.env.ACCESS_TOKEN, // (optional API access token)
+        path: '/preview', // (optional preview path. Default: /preview)
+        previews: true, // (optional, activated Previews. Default: false)
+        pages: [{ // (optional, builds pages dynamically)
+        type: 'Portfolio_item',         // TypeName from prismic
+        match: '/portfolio/:uid',  // Pages will be generated under this pattern
+        path: '/portfolio/item',        // Placeholder page for unpublished documents
+        component: require.resolve('./src/templates/portfolio_item.js'),
+      }],    
+      }    
+    },
+    {
       resolve: `gatsby-plugin-offline`,
       options: {
         precachePages: [`/about/`, `/contact/`, `/services/*`, `/work/*`],
       },
-    },   
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
-    {
-      resolve: `gatsby-plugin-manifest`,
-      options: {
-        name: `sjoerd-koelewijn-portfolio`,
-        short_name: `portfolio`,
-        start_url: `/`,
-        background_color: `#E9FBFF`,
-        theme_color: `#E9FBFF`,
-        display: `minimal-ui`,
-        icon: `src/images/icon.png`, // This path is relative to the root of the site.
-      },
     },
-    {
-      resolve: 'gatsby-plugin-prefetch-google-fonts',
-      options: {
-        fonts: [
-          {
-            family: 'Heebo',
-            variants: ['300', '400', '500', '800', '900'],
-          },
-        ],
-      },
-    },
-    {
-	
-      resolve: 'gatsby-source-prismic-graphql',
-    
-        options: {
-    
-          repositoryName: process.env.REPO_NAME, // (REQUIRED, replace with your own)
-    
-          accessToken: process.env.ACCESS_TOKEN, // (optional API access token)
-    
-          path: '/preview', // (optional preview path. Default: /preview)
-    
-          previews: true, // (optional, activated Previews. Default: false)
-
-          pages: [{ // (optional, builds pages dynamically)
-	
-            type: 'Portfolio_item',         // TypeName from prismic
-      
-            match: '/portfolio/:uid',  // Pages will be generated under this pattern
-      
-            path: '/portfolio/item',        // Placeholder page for unpublished documents
-      
-            component: require.resolve('./src/templates/portfolio_item.js'),
-
-          }],    
-        
-      }    
-    }
   ],
 };
