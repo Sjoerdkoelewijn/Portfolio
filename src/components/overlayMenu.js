@@ -4,7 +4,7 @@ import { RichText } from "prismic-reactjs";
 import styles from "../styles/modules/menu.module.scss";
 import CloseIcon from "../components/icons/closeIcon";
 import htmlSerializer from "../utils/htmlSerializer";
-import SocialIcon from "../components/SocialIcon";
+import SocialIcon from "../components/socialIcon";
 
 const OverlayMenu = ({ menuOpen, callback }) => {
     const data = useStaticQuery(graphql`

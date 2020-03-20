@@ -4,7 +4,7 @@ import { RichText } from "prismic-reactjs";
 import styles from "../styles/modules/footer.module.scss";
 import htmlSerializer from "../utils/htmlSerializer";
 import LinkResolver from "../utils/linkResolver";
-import SocialIcon from "../components/SocialIcon";
+import SocialIcon from "../components/socialIcon";
 
 const Footer = () => {
     const data = useStaticQuery(graphql`
