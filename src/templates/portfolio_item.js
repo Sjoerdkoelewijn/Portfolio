@@ -25,9 +25,11 @@ const PortfolioItem = ({ data }) => {
           
           <Menu />
 
-          <a className={styles.website} href={doc.url.url}>
-            {doc.website}
-          </a>
+          {doc.website &&
+            <a className={styles.website} href={doc.url.url}>
+              {doc.website}
+            </a>
+          }
 
           <h1 className={styles.header}>
             <RichText render={doc.subtitle} htmlSerializer={htmlSerializer} />
@@ -43,22 +45,29 @@ const PortfolioItem = ({ data }) => {
               <li>
                 <strong>Role.</strong>{doc.role}
               </li>
-              <li className={styles.service_links}>
-                <strong>Type.</strong>
 
-                  {doc.type.map(doc => {
+                {doc.type &&
 
-                    return (
-                      <Link to={LinkResolver(doc.service._meta)} className={styles.service_link}>
+                  <li className={styles.service_links}>
 
-                        <RichText render={doc.service.title} htmlSerializer={htmlSerializer} />
+                      <strong>Type.</strong>
 
-                      </Link>
-                    );
+                      {doc.type.map(doc => {
 
-                  })} 
+                        return (
+                          <Link to={LinkResolver(doc.service._meta)} className={styles.service_link}>
 
-              </li>
+                            <RichText render={doc.service.title} htmlSerializer={htmlSerializer} />
+
+                          </Link>
+                        );
+
+                      })}
+                    
+                  </li>
+
+                }
+
             </ul>
           </div>
 
@@ -82,40 +91,66 @@ const PortfolioItem = ({ data }) => {
           {RichText.render(doc.introduction_text)}
         </div>
 
-        <div className={styles.image_area}>
-          {doc.introduction_images.map(img => {
-            return (
+          {doc.introduction_images ? (
 
-              <Img
-                className={styles.introduction_image} 
-                fluid={img.introduction_imageSharp.childImageSharp.fluid} 
-              />
-              
-            )
-          })}
-        </div>
+            <div className={styles.image_area}>
+              {doc.introduction_images.map(img => {
+                return (
 
-        {doc.body.map(slice => {
+                  <>
 
-          switch(slice.type) {
-            case 'text_section': return slice.fields.map(text => { 
-              return (
-              <div className={styles.text_area}>
-                {RichText.render(text.text_block_title)}
-                {RichText.render(text.text_block_subtitle)}
-                {RichText.render(text.text_block_text)}
-              </div>
-              )
-            })
-            case 'quote': return slice.fields.map(quote => {
-              return (
-                <div className={styles.quote_area}>
-                  {quote.quote_text}
-                </div>
-              )
-            })  
+                  {img.introduction_imageSharp &&
+                    
+                    <Img
+                    className={styles.introduction_image} 
+                    fluid={img.introduction_imageSharp.childImageSharp.fluid} 
+                  
+                    />
+
+                  }
+                  
+                  </>
+                )
+              })}
+            </div>
+            
+          ) : (
+
+            <p className={styles.text_area}>
+              More information coming soon.
+            </p>
+
+          )}
+
+          {doc.body && 
+          
+            <div className={styles.additional_info}>
+
+              {doc.body.map(slice => {
+
+                switch(slice.type) {
+                  case 'text_section': return slice.fields.map(text => { 
+                    return (
+                    <div className={styles.text_area}>
+                      {RichText.render(text.text_block_title)}
+                      {RichText.render(text.text_block_subtitle)}
+                      {RichText.render(text.text_block_text)}
+                    </div>
+                    )
+                  })
+                  case 'quote': return slice.fields.map(quote => {
+                    return (
+                      <div className={styles.quote_area}>
+                        {quote.quote_text}
+                      </div>
+                    )
+                  })  
+                }
+              })}
+            
+            </div>
+
           }
-        })}          
 
       </article>      
 

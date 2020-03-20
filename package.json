@@ -11,7 +11,7 @@
     "cli": "^1.0.1",
     "gatsby": "^2.19.19",
     "gatsby-background-image": "^0.9.12",
-    "gatsby-cli": "^2.10.10",
+    "gatsby-cli": "^2.10.13",
     "gatsby-image": "^2.2.31",
     "gatsby-plugin-manifest": "^2.2.27",
     "gatsby-plugin-offline": "^3.0.35",

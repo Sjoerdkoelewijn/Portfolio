@@ -8,7 +8,7 @@ import OverlayMenu from "../components/overlayMenu";
 import LinkResolver from "../utils/linkResolver";
 import { Location } from '@reach/router'
 
-const Menu = ( props ) => {
+const Menu = () => {
     const data = useStaticQuery(graphql`
     query getMenu{
         prismic {
@@ -106,30 +106,36 @@ const Menu = ( props ) => {
 
     return (
 
-    <>
+    <Location>
 
-    <div className={styles.menu}>
+    {({ location }) =>
 
-        <div className={styles.menu_btn} onClick={handleOverlayMenu}>
-            <BurgerIcon />
-            {RichText.render(doc.node.menu)}
+        <>
+
+        <div className={styles.menu}>
+
+            <div className={styles.menu_btn} onClick={handleOverlayMenu}>
+                <BurgerIcon />
+                {RichText.render(doc.node.menu)}
+            </div>
+
+            {location.pathname !== '/contact' &&
+
+                <Link to={LinkResolver(doc.node.link._meta)} className={styles.hire_btn}>
+                    <HireIcon />
+                    {RichText.render(doc.node.hire)}
+                    
+                </Link>
+
+            }
+        
         </div>
 
-        {location.pathname !== '/contact' &&
+        <OverlayMenu menuOpen={menuOpen} callback={handleOverlayMenu} />    
 
-            <Link to={LinkResolver(doc.node.link._meta)} className={styles.hire_btn}>
-                <HireIcon />
-                {RichText.render(doc.node.hire)}
-                
-            </Link>
-
-        }
-       
-    </div>
-
-    <OverlayMenu menuOpen={menuOpen} callback={handleOverlayMenu} />    
-
-    </>
+        </>
+    }    
+    </Location>
 
     )
 }

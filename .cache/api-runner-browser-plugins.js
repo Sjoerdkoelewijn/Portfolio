@@ -3,7 +3,7 @@ module.exports = [{
       options: {"plugins":[]},
     },{
       plugin: require('../node_modules/gatsby-plugin-scroll-indicator/gatsby-browser.js'),
-      options: {"plugins":[],"color":"#FE5862","paths":["/","/about/","/work/**"],"zIndex":9999},
+      options: {"plugins":[],"color":"#FE5862","paths":["/","/about/","/contact/","/services/**","/work/**"],"zIndex":9999},
     },{
       plugin: require('../node_modules/gatsby-plugin-offline/gatsby-browser.js'),
       options: {"plugins":[],"precachePages":["/about/","/contact/","/services/*","/work/*"]},

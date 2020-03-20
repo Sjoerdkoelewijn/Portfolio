@@ -46,7 +46,7 @@ module.exports = {
         // Configure color of the scroll indicator
         color: '#FE5862',
         // Configure paths where the scroll indicator will appear
-        paths: ['/', '/about/', '/work/**'],
+        paths: ['/', '/about/', '/contact/', '/services/**', '/work/**'],
         // Configure the z-index of the indicator element
         zIndex: 9999,
       },
@@ -63,7 +63,7 @@ module.exports = {
       options: {
         useMozJpeg: false,
         stripMetadata: true,
-        defaultQuality: 80,
+        defaultQuality: 90,
       },
     },
     {
