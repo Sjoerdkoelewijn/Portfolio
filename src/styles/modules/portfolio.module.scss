@@ -203,7 +203,7 @@
 
     --grid-gap:4vw; // made it into a variable because its value is also used to calculate the portfolio block width.
     
-    .portfolio_inner.portfolio_category {
+    .hero + .portfolio_inner {
         margin-top:-25vh;
     } 
 

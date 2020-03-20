@@ -4,8 +4,8 @@ import Layout from "../components/layout";
 import { RichText } from "prismic-reactjs";
 import BackgroundImage from 'gatsby-background-image';
 import styles from "../styles/modules/index.module.scss";
-import portfolioStyles from "../styles/modules/portfolio.module.scss";
 import Menu from "../components/menu";
+import Portfolio from "../components/portfolio";
 import ServicesOverview from "../components/services";
 
 const IndexPage = ({ data }) => {
@@ -36,52 +36,7 @@ const IndexPage = ({ data }) => {
 
       </article>
 
-      <article className={portfolioStyles.portfolio}>
-
-        <div className={portfolioStyles.intro_text}>  
-
-          {RichText.render(cat.node.title)}
-          {RichText.render(cat.node.subtitle)}
-          {RichText.render(cat.node.excerpt)}
-
-        </div>
-
-        <div className={portfolioStyles.portfolio_inner}>
-
-          {data.prismic.allPortfolio_items.edges.map(portfolio => {
-
-            let slug = `/portfolio/${portfolio.node._meta.uid}`;
-
-            return (
-              <article className={portfolioStyles.portfolio_block}>
-                
-                <Link to={slug} className={portfolioStyles.link}>
-
-                  <BackgroundImage 
-                    Tag="section"
-                    className={portfolioStyles.image}
-                    fluid={portfolio.node.main_imageSharp.childImageSharp.fluid}
-                    backgroundColor={`#CAEFFA`}
-                    >
-                  </BackgroundImage>
-                
-                </Link>  
-
-                <Link to={slug} className={portfolioStyles.link}>
-                  {RichText.render(portfolio.node.title)}
-                </Link>
-
-                {RichText.render(portfolio.node.subtitle)}
-
-              </article>
-            );
-
-          })}
-
-        </div>
-
-      </article>
-
+      <Portfolio />
 
       <article className={styles.services}>
 
