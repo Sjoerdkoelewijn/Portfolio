@@ -58,14 +58,7 @@ module.exports = {
       },
     },   
     `gatsby-transformer-sharp`,
-    {
-      resolve: `gatsby-plugin-sharp`,
-      options: {
-        useMozJpeg: false,
-        stripMetadata: true,
-        defaultQuality: 90,
-      },
-    },
+    `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -75,7 +68,7 @@ module.exports = {
         background_color: `#E9FBFF`,
         theme_color: `#E9FBFF`,
         display: `minimal-ui`,
-        icon: `src/images/logo-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/icon.png`, // This path is relative to the root of the site.
       },
     },
     {

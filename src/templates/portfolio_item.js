@@ -77,7 +77,7 @@ const PortfolioItem = ({ data }) => {
           Tag="section"
           className={styles.hero_image}
           fluid={doc.main_imageSharp.childImageSharp.fluid}
-          backgroundColor={`#9CDEF2`}
+          backgroundColor={`#CAEFFA`}
           >
         </BackgroundImage>
 

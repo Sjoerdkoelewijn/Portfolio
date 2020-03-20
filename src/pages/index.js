@@ -30,7 +30,7 @@ const IndexPage = ({ data }) => {
           Tag="section"
           className={styles.hero_image}
           fluid={hero.node.intro_imageSharp.childImageSharp.fluid}
-          backgroundColor={`#9CDEF2`}
+          backgroundColor={`#CAEFFA`}
           >
         </BackgroundImage>
 
@@ -61,7 +61,7 @@ const IndexPage = ({ data }) => {
                     Tag="section"
                     className={portfolioStyles.image}
                     fluid={portfolio.node.main_imageSharp.childImageSharp.fluid}
-                    backgroundColor={`#f2f2f2`}
+                    backgroundColor={`#CAEFFA`}
                     >
                   </BackgroundImage>
                 

@@ -9,7 +9,7 @@ var plugins = [{
       options: {"plugins":[],"precachePages":["/about/","/contact/","/services/*","/work/*"]},
     },{
       plugin: require('D:/development/Portfolio/node_modules/gatsby-plugin-manifest/gatsby-ssr'),
-      options: {"plugins":[],"name":"sjoerd-koelewijn-portfolio","short_name":"portfolio","start_url":"/","background_color":"#E9FBFF","theme_color":"#E9FBFF","display":"minimal-ui","icon":"src/images/logo-icon.png"},
+      options: {"plugins":[],"name":"sjoerd-koelewijn-portfolio","short_name":"portfolio","start_url":"/","background_color":"#E9FBFF","theme_color":"#E9FBFF","display":"minimal-ui","icon":"src/images/icon.png"},
     },{
       plugin: require('D:/development/Portfolio/node_modules/gatsby-plugin-prefetch-google-fonts/gatsby-ssr'),
       options: {"plugins":[],"fonts":[{"family":"Heebo","variants":["300","400","500","800","900"]}]},
