@@ -3,7 +3,7 @@ require('dotenv').config()
 module.exports = {
   siteMetadata: {
     title: `Sjoerd Koelewijn Portfolio`,
-    description: `I am Sjoerd Koelewijn. A freelance designer and developer based in Amsterdam. I design and build websites for people like you.`,
+    description: `Simple static blog theme that uses wpgraphql and gutenberg.`,
     author: `@sjoerdkoelewijn`,
     siteUrl: `https://sjoerdkoelewijn.com`,
   },
@@ -18,12 +18,32 @@ module.exports = {
       },
     },
     `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,    
+    {
+      resolve: `gatsby-plugin-sharp`,
+      options: {
+        useMozJpeg: false,
+        stripMetadata: true,
+        defaultQuality: 80,
+      },
+    },
+    {
+      resolve: `gatsby-source-graphql`,
+      options: {
+        // Remote schema query type. This is an arbitrary name.
+        typeName: `WPGraphQL`,
+        // Field name under which it will be available. Used in your Gatsby query. This is also an arbitrary name.
+        fieldName: `wordPress`,
+        // GraphQL endpoint, relative to your WordPress home URL.
+        url: `https://api.sjoerdkoelewijn.com/graphql`,
+        refetchInterval: 60,
+        batch: true,
+      },
+    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `sjoerd-koelewijn-portfolio`,
-        short_name: `portfolio`,
+        name: `Sjoerd Koelewijn Portfolio`,
+        short_name: `Portfolio`,
         start_url: `/`,
         background_color: `#E9FBFF`,
         theme_color: `#E9FBFF`,
@@ -72,30 +92,15 @@ module.exports = {
         // Configure color of the scroll indicator
         color: '#FE5862',
         // Configure paths where the scroll indicator will appear
-        paths: ['/', '/about/', '/contact/', '/services/**', '/work/**'],
+        paths: ['/', '/about/', '/contact/', '/services/**', '/portfolio/**'],
         // Configure the z-index of the indicator element
         zIndex: 9999,
       },
-    },
-    {
-	    resolve: 'gatsby-source-prismic-graphql',
-      options: {
-        repositoryName: process.env.REPO_NAME, // (REQUIRED, replace with your own)
-        accessToken: process.env.ACCESS_TOKEN, // (optional API access token)
-        path: '/preview', // (optional preview path. Default: /preview)
-        previews: true, // (optional, activated Previews. Default: false)
-        pages: [{ // (optional, builds pages dynamically)
-        type: 'Portfolio_item',         // TypeName from prismic
-        match: '/portfolio/:uid',  // Pages will be generated under this pattern
-        path: '/portfolio/item',        // Placeholder page for unpublished documents
-        component: require.resolve('./src/templates/portfolio_item.js'),
-      }],    
-      }    
-    },
+    },    
     {
       resolve: `gatsby-plugin-offline`,
       options: {
-        precachePages: [`/about/`, `/contact/`, `/services/*`, `/work/*`],
+        precachePages: [`/about/`, `/contact/`, `/services/*`, `/portfolio/*`],
       },
     },
   ],

@@ -1,0 +1,20 @@
+@import "../../variables/colors";
+@import "../../variables/breakpoints";
+@import "../../variables/typography";
+@import "../../variables/spacing";
+
+.services {
+    background:$secondary-gradient;
+    margin:var(--margin);
+    padding:var(--padding);
+
+    .intro_text {
+        margin-bottom:8vw;
+        width:70%;
+    
+        @include large-phone {
+            width:100%;           
+        }
+        
+    }
+}

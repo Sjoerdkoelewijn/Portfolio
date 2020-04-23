@@ -63,6 +63,11 @@
                 }
             }
         }
+
+        @include large-phone {
+            display:none;           
+        }
+
     }
 }
 

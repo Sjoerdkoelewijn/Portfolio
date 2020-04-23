@@ -20,6 +20,8 @@
     --vertical-spacing-m:50px;
     --vertical-spacing-l:100px;
 
+    --grid-gap:4vw; // used for portfolio block width & gap in between blocks on homepage.
+
 }
 
 @include large-laptop {

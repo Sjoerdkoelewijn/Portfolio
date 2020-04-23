@@ -1,0 +1,24 @@
+@import "../../variables/colors";
+@import "../../variables/breakpoints";
+@import "../../variables/typography";
+@import "../../variables/spacing";
+
+.portfolio { 
+
+    .intro_text {
+        margin:calc(var(--margin) + var(--padding));
+
+        p {
+            width:60%;
+
+            @include small-laptop {
+                width:75%;
+            }
+    
+            @include large-phone {
+                width:95%;            
+            }
+        }
+    }
+    
+}

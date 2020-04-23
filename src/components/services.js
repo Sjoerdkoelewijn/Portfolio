@@ -1,72 +1,74 @@
-import React from 'react';
-import { useStaticQuery, graphql } from "gatsby";
-import { RichText } from "prismic-reactjs";
+import React from "react";
+import { useStaticQuery, graphql } from "gatsby"
 import styles from "../styles/modules/services.module.scss";
 
-const ServicesOverview = () => {
+const ServicesList = () => {
     const data = useStaticQuery(graphql`
-    query getServicesOverview{
-        prismic {
-            allCategoriess(uid: "services") {
+    query getServices {
+        wordPress {
+            services {
                 edges {
                     node {
                         title
-                        subtitle
-                        excerpt
+                        blocks {
+                            ... on WPGraphQL_CoreParagraphBlock {
+                            originalContent
+                            }
+                        }
                     }
                 }
-            }
-
-            allServices_items(sortBy: order_ASC) {
-                edges {
-                    node {
-                        title
-                        excerpt            
-                    }
-                }
-            }
+            } 
         }
     }
 
     `)
 
-    const serv = data.prismic.allCategoriess.edges.slice(0,1).pop();
-    if (!serv) return null;
-
-    
     return (
 
-    <div class={styles.services_wrap}>
-
-        <div className={styles.intro_text}>  
-
-            {RichText.render(serv.node.title)}
-            {RichText.render(serv.node.subtitle)}
-            {RichText.render(serv.node.excerpt)}
-
-        </div>
-
         <div className={styles.service_inner}>
+        
+            {data.wordPress.services.edges.map(service => {
 
-            {data.prismic.allServices_items.edges.map(service => {
+                return (
+        
+                    <article className={styles.service_block}>
+        
+                        <h2
+                            dangerouslySetInnerHTML={{
+                                __html: service.node.title,
+                            }}
+                        />
+        
+                        <p
+                            dangerouslySetInnerHTML={{
+                                __html: service.node.blocks.originalContent,
+                            }}
+                        />
 
-            return (
-                <article className={styles.service_block}>
-                    
-                    {RichText.render(service.node.title)}
-                    {RichText.render(service.node.excerpt)}
+                        {service.node.blocks.map(block => {
 
-                </article>
-            );
-
-            })}
+                            return (
+                                <p
+                                dangerouslySetInnerHTML={{
+                                    __html: block.originalContent,
+                                }}
+                                />
+                            )
+                        })}
+                        
+                    </article>
+        
+                )
+        
+            })} 
 
         </div>
-
-    </div>
 
     )
-}
+
+};
+
+export default ServicesList;
 
 
-export default ServicesOverview 
+

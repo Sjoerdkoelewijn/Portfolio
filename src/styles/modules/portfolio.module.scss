@@ -3,116 +3,34 @@
 @import "../variables/typography";
 @import "../variables/spacing";
 
-// The hero on the portfolio detail pages.
-.hero {
-    background:$secondary-gradient;
-    margin:var(--margin);
-    display:flex;
+.portfolio { // The wrapper on the portfolio detail pages.
+    margin:var(--margin);    
 
-    .header {
-        margin-top:30px;
-        font-size:var(--small-title);
-        line-height:130%;
-    }
-    
-    .website {
-        text-transform:uppercase;
-        text-decoration:none;
-        font-size:1.25rem;
-        font-weight:500;
-
-        @include large-phone {
-            font-size:1rem;           
-        }
-
-        &:hover {
-            color:$action;
-        }
-    }
-
-    .text_area {
-        width:50%;
-        padding:5vw;
-        //box-sizing: border-box;
-        display:block;
-
-        @include large-phone {
-            width:100%;
-        }
-    }
-   
-    .meta {
-        font-size:1.5rem;
-        font-weight:300;
-        line-height: 300%;
-
-        @include large-phone {
-            font-size:1.3rem;           
-        }
-
-        strong {
-            width:100px;
-            display: inline-block;
-        }
-
-        .service_links {
-
-            .service_link {
-                text-decoration:none;
-
-                &:hover {
-                    color:$action;
-                }
-    
-                &:after {
-                    content:' & ';
-                    color:$primary;
-                }
-
-                &:last-child {
-        
-                    &:after {
-                        content:'';
-                    }
-                }
-            }
-          
-        }        
-    }
-
-    .hero_image {
-        width:50%;
-
-        @include large-phone {
-            display:none;            
-        }
-    }
-}
-
-// Main content on the portfolio detail pages.
-
-.main_content {
-
-    .text_area {
-        margin:calc(var(--margin) + var(--padding));
-
+    .CoreHeadingBlock {
         h2 {
             font-weight:600;
             line-height:150%;
             font-size:var(--normal-title);
-            margin-bottom:15px;
-
+            margin:20vh var(--padding) 15px var(--padding);
+    
             &:after {
                 content:'.';
                 color:$action;
             }
-          
         }
-
+    
         h3 {
-            margin-bottom:50px; 
+            font-size:var(--normal-subtitle);
+            margin:0 var(--padding) 50px var(--padding); 
         }
-
+    }
+    
+    .CoreParagraphBlock {
+        p {
+            width:60vw;
+            margin:0 var(--padding) 0 var(--padding);
+        }
+        
     }
 
     .image_area {
@@ -168,12 +86,13 @@
         margin:var(--margin);
         padding:10vw 15vw;
     }
+        
     
 }
 
 // This is the component used on the homepage and portfolio category page
 
-.portfolio { 
+
     
     .intro_text {
         margin:calc(var(--margin) + var(--padding));
@@ -193,7 +112,6 @@
 
     .hero {
         background:$secondary-gradient;
-        padding-bottom:20vh;
 
         .intro_text {
             padding:var(--padding); // used on the portfolio category page
@@ -201,8 +119,7 @@
         }
     }
 
-    --grid-gap:4vw; // made it into a variable because its value is also used to calculate the portfolio block width.
-    
+       
     .hero + .portfolio_inner {
         margin-top:-25vh;
     } 
@@ -297,4 +214,3 @@
 
     }
 
-}

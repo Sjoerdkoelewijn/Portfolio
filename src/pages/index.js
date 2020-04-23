@@ -1,102 +1,91 @@
 import React from "react";
-import { graphql, Link } from "gatsby";
+import { graphql } from "gatsby";
 import Layout from "../components/layout";
-import { RichText } from "prismic-reactjs";
-import BackgroundImage from 'gatsby-background-image';
 import styles from "../styles/modules/index.module.scss";
-import Menu from "../components/menu";
-import Portfolio from "../components/portfolio";
-import ServicesOverview from "../components/services";
+
+import ParagraphBlock from "../components/blocks/paragraph";
+import HeadingBlock from "../components/blocks/heading";
+import ImageBlock from "../components/blocks/image";
+import QuoteBlock from "../components/blocks/quote";
+
+import NoImageHero from "../components/blocks/noimagehero";
+import PortfolioPosts from "../components/blocks/portfolioposts";
+import ServicesPosts from "../components/blocks/servicesposts";
+import Hero from "../components/blocks/hero";
+import PortfolioHero from "../components/blocks/portfoliohero";
 
 const IndexPage = ({ data }) => {
-
-  const hero = data.prismic.allHomes.edges.slice(0,1).pop();
-  if (!hero) return null;
   
-  const cat = data.prismic.allCategoriess.edges.slice(0,1).pop();
-  if (!cat) return null;
-
   return (
+
     <Layout>
-      <article className={styles.hero}>
-
-        <div className={styles.text_area}>
-          <Menu />
-          {RichText.render(hero.node.intro_title)}
-          {RichText.render(hero.node.intro_excerpt)}
-        </div>
-
-        <BackgroundImage 
-          Tag="section"
-          className={styles.hero_image}
-          fluid={hero.node.intro_imageSharp.childImageSharp.fluid}
-          backgroundColor={`#CAEFFA`}
-          >
-        </BackgroundImage>
-
-      </article>
-
-      <Portfolio />
-
-      <article className={styles.services}>
-
-        <ServicesOverview />
-
-      </article>
+          
+          <article className={styles.page}>
+             
+            {data.wordPress.pageBy.blocks.map(block => {
+   
+              const typeName = block.__typename;
+  
+              switch (typeName) {
+                case 'WPGraphQL_CustomBlocksPortfolioheroBlock' :
+                  return <span className={styles.CustomPortfolioHero}><PortfolioHero key={block.id} {...block} /></span>;
+  
+                case 'WPGraphQL_CustomBlocksHeroBlock' :
+                  return <span className={styles.CustomHero}><Hero key={block.id} {...block} /></span>;
+  
+                case 'WPGraphQL_CustomBlocksServicesPostsBlock' :
+                  return <span className={styles.CustomServicesPosts}><ServicesPosts key={block.id} {...block} /></span>;
+  
+                case 'WPGraphQL_CustomBlocksPortfolioPostsBlock' :
+                  return <span className={styles.CustomPortfolioPosts}><PortfolioPosts key={block.id} {...block} /></span>;
+  
+                case 'WPGraphQL_CustomBlocksNoimageheroBlock' :
+                  return <span className={styles.CustomPortfolioPosts}><NoImageHero key={block.id} {...block} /></span>;
+  
+                case 'WPGraphQL_CoreHeadingBlock' :
+                  return <span className={styles.CoreHeadingBlock}><HeadingBlock key={block.id} {...block} /></span>;
+  
+                case 'WPGraphQL_CoreParagraphBlock':
+                  return <span className={styles.CoreParagraphBlock}><ParagraphBlock key={block.id} {...block} /></span>;
+  
+                case 'WPGraphQL_CoreImageBlock':
+                  return <span className={styles.CoreImageBlock}><ImageBlock key={block.id} {...block} /></span>;
+  
+                case 'WPGraphQL_CoreQuoteBlock':
+                  return <span className={styles.CoreQuoteBlock}><QuoteBlock key={block.id} {...block} /></span>;    
+                    
+                default :
+                  return 'No content yet';  
+              }     
+   
+            })}  
+   
+          </article>  
 
     </Layout>
-  );
+  
+  )
 };
 
 export const query = graphql`
   query getIndex {
-    prismic {
-      allHomes {
-        edges {
-          node {
-            intro_excerpt
-            intro_title
-            intro_image
-            intro_imageSharp {
-                childImageSharp {
-                  fluid(quality: 100, maxWidth: 960) {
-                    ...GatsbyImageSharpFluid_withWebp
-                  }
-                }
-            }
-          }
-        }
-      }
-      allPortfolio_items {
-        edges {
-          node {
-            title
-            subtitle
-            main_image
-            main_imageSharp {
-                childImageSharp {
-                  fluid(quality: 100, maxWidth: 960) {
-                    ...GatsbyImageSharpFluid_withWebp
-                  }
-                }
-            }
-            _meta {
-              uid
-              type
-            }
-          }
-        }
-      }
-      allCategoriess(uid: "portfolio") {
-        edges {
-          node {
-            title
-            subtitle
-            excerpt
-          }
+    wordPress {
+      pageBy(uri: "home") {
+        blocks {
+          __typename
+          ...CustomPortfolioHero
+          ...CustomHero
+          ...CustomServicesPosts
+          ...CustomPortfolioPosts
+          ...CustomNoImageHero
+          ...CoreHeadingBlock
+          ...CoreParagraphBlock
+          ...CoreImageBlock
+          ...CoreQuoteBlock
         }
       }
     }
+   
   }
 `;
 
