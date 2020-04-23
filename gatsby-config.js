@@ -35,7 +35,7 @@ module.exports = {
         fieldName: `wordPress`,
         // GraphQL endpoint, relative to your WordPress home URL.
         url: `https://api.sjoerdkoelewijn.com/graphql`,
-        refetchInterval: 60,
+        //refetchInterval: 60,
         batch: true,
       },
     },
@@ -92,7 +92,7 @@ module.exports = {
         // Configure color of the scroll indicator
         color: '#FE5862',
         // Configure paths where the scroll indicator will appear
-        paths: ['/', '/about/', '/contact/', '/services/**', '/portfolio/**'],
+        paths: ['/', '/contact/', '/portfolio/**'],
         // Configure the z-index of the indicator element
         zIndex: 9999,
       },
@@ -100,7 +100,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-offline`,
       options: {
-        precachePages: [`/about/`, `/contact/`, `/services/*`, `/portfolio/*`],
+        precachePages: [`/`, `/contact/`, `/portfolio/*`],
       },
     },
   ],
