@@ -1,77 +1,52 @@
-import React from 'react';
-import { useStaticQuery, graphql, Link } from "gatsby"
-import CloseIcon from '../images/close-icon.svg';
-import SocialMenu from './socialmenu'
+import React, { useState } from 'react';
+import { useStaticQuery, graphql, Link } from "gatsby";
+import styles from "../styles/modules/menu.module.scss";
+import BurgerIcon from "../components/icons/burgerIcon";
+import Logo from "../components/icons/logo";
+import OverlayMenu from "../components/overlayMenu";
+import { Location } from '@reach/router'
 
-const OverlayMenu = ({ menuOpen, callback }) => {
-    const data = useStaticQuery(graphql`
-    query getMenu{
-        wordPress {
-            menuItems(where: {location: MAIN_NAVIGATION}) {
-                nodes {
-                    label
-                    url
-                }
-            }
-            microcopyOptionsSettings {
-                menutext  
-            }
-        }
-    }
+const Menu = () => {
 
-    `)
-    return(
+    const [menuOpen, setMenuOpen] = useState(false);
 
+    const handleOverlayMenu = () => {
+        setMenuOpen(!menuOpen);
+      }
 
-    <div className={`menu__bg ${menuOpen}`}>
+    return (
 
-        <div className={`menu__wrap`}>
+    <Location>
 
-            <div className={`menu__wrap_inner`}>
+    {({ location }) =>
 
-                <nav className={`menu__sitenav`}>
+        <>
+
+        <div className={styles.menu}>
             
-                    {data.wordPress.menuItems.nodes.map(node => {
+            {location.pathname !== '/contact' &&
 
-                        const wpurl = `https://api.sjoerdkoelewijn.com`
-                        const onlyPath = node.url.replace(wpurl, ``)
+                <Link to={`/`} className={styles.logo}>
+                    <Logo />                    
+                </Link>
 
-                        return (
-                            <Link key={node.id} aria-label={node.label} to={`/${onlyPath}/`} className={`menu__sitenav_link`}>
-                                {node.label}
-                            </Link>
-                        )
-                    })}
+            }
 
-                </nav>
-
-                <div className={`menu__right`}>
-                    
-                    <p className={`menu__right_text`}>
-                        <div
-                            dangerouslySetInnerHTML={{
-                                __html: data.wordPress.microcopyOptionsSettings.menutext,
-                            }}
-                        />
-                    </p>
-
-                    <SocialMenu />
-                
-                </div>
-
+            <div className={styles.menu_btn} onClick={handleOverlayMenu}>
+                <BurgerIcon />                   
             </div>
-
-            <div className={`menu__closebtn`} role="button" aria-label="close" onClick={callback} tabIndex="0" onKeyDown={callback}>
-                <span>Close</span>
-                <img className={`menu__closebtn_icon`} src={CloseIcon} alt="Close menu" />
-            </div>
-
+        
         </div>
 
-    </div>
+        <OverlayMenu menuOpen={menuOpen} callback={handleOverlayMenu} />    
+
+        </>
+    }    
+    </Location>
 
     )
 }
 
 
-export default OverlayMenu 
+
+export default Menu 

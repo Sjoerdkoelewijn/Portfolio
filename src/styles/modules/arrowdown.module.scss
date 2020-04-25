@@ -1,0 +1,9 @@
+@import "../variables/colors";
+@import "../variables/animations";
+
+.ArrowDownIcon {
+    position:absolute;
+    margin-left:-16px;
+    margin-top:60vh;
+    animation: arrowDown 3s infinite;
+}

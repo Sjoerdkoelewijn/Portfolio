@@ -1,0 +1,289 @@
+@import "../variables/colors";
+@import "../variables/breakpoints";
+@import "../variables/typography";
+@import "../variables/spacing";
+
+.menu {
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    margin:0 0 8vw 0;
+
+    @include large-laptop {
+        width:100%;
+        margin:0 0 8vw 0;
+    }
+    
+    p {
+        font-size:var(--small-p);
+        font-weight:400;
+        display:inline;
+        margin-left:10px;
+    }
+
+    .menu_btn {
+        cursor:pointer;
+        margin-top:10px;
+
+        svg {
+            rect {
+                fill:$primary;
+                transition:all .5s ease-in-out;
+            }                
+        }
+
+        &:hover { 
+            svg {
+                rect {
+                    transition:all .5s ease-in-out;
+                    fill:$primary;
+                }                
+            }  
+        }
+
+    }
+
+   .logo {
+        svg {
+
+            path, circle {
+                transition:all .5s ease-in-out;
+            }
+            
+        }
+
+        &:hover {
+
+            svg {
+                path, circle {
+                    fill:$primary;
+                    transition:all .5s ease-in-out;
+                }
+            }
+        }
+
+
+    }
+}
+
+.overlay_menu {
+    background:$primary;
+    color:$white;
+    width:100%;
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:9999;
+    height:100vh;
+    overflow:hidden;
+    
+    .overlay_menu_inner {
+        box-sizing: border-box;
+        height:100vh;
+        display:flex;
+        justify-content:space-between;   
+
+        .left_section {
+            display:flex;
+
+            .main_menu {
+                margin-left:calc( var(--margin) + var(--padding) );
+                align-self: center;
+                
+                .menu_link {
+                    color:$white;
+                    text-decoration: none;
+                    font-weight:600;
+                    font-size:2.8rem;
+                    margin-bottom:5vh;
+                    display:block;
+       
+                    &:hover {
+                        color:$action;
+                    }
+                }
+
+                .social_menu { // social menu is added twice and in the left section it is hidden except on mobile screens
+                    display:none;
+                    padding-top:var(--vertical-spacing-m);
+
+                    @include large-phone {
+                        display: block;        
+                    }                                                        
+            
+                    .social_icon {                        
+                        margin-right:20px;
+                          
+                    }
+                }
+    
+            }
+        }
+
+        .right_section {
+            width:100%;
+            height:100vh;
+            display:flex;
+            flex-direction: column;
+            justify-content: flex-end; 
+            
+            background:url(../../images/menu-bg-shape.svg) no-repeat left center;
+            background-size: cover;
+
+            @include large-phone {
+                display: none;        
+            }
+
+            @include small-laptop {
+                background:none;           
+            }            
+
+            .text_area {
+                margin-right:calc( var(--margin) + var(--padding) );
+                margin-left:var(--margin);
+                margin-bottom:var(--padding);
+                
+                display:inline-flex;
+                flex-direction: column;
+                justify-content: flex-end; 
+                
+                p {
+                    font-size:var(--small-p);
+                    font-weight:400;
+                    line-height:180%;
+                    width:45%;
+                    align-self: flex-end;
+                    text-align:right;
+
+                    @include small-laptop {
+                        width:60%;   
+                    } 
+
+                    @include large-phone {
+                        display:none;           
+                    }
+                }
+
+                p:nth-of-type(2) {
+                    @include large-laptop {
+                        margin-bottom:0;    
+                    }                    
+                }
+
+                p:nth-of-type(3) {
+                    @include desktop {
+                        display:none;    
+                    }                     
+                }
+                              
+    
+                .social_menu {
+                    display:inline-block;
+                    align-self: flex-end;
+                    margin-top:var(--vertical-spacing-m);                                     
+            
+                    .social_icon {                        
+                        margin-left:20px;
+                          
+                    }
+                }
+            }
+
+        }
+
+        .social_menu {
+            
+            .social_icon {
+                
+                svg {
+                    path {
+                        fill:$white;
+                        transition:fill .5s ease;
+                    }
+                }
+    
+                &:hover {
+                    svg {
+                        path {
+                            fill:$primary;
+                            transition:fill .5s ease;
+
+                            @include small-laptop {
+                                fill:$action;          
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .logo_close_wrap {
+            position:absolute;
+            width:calc(100vw - (2 * (var(--margin) + var(--padding))));
+            padding-left:calc(var(--margin) + var(--padding));
+            padding-top:var(--margin);
+            display:flex;
+            justify-content:space-between; 
+
+            @include large-phone {
+                padding-top:calc(var(--margin) + var(--padding));      
+            }
+
+            .close_btn {                     
+                cursor:pointer;
+                transition:all .5s ease-in-out;
+                               
+    
+                svg {
+                    width:20px;
+                    height:20px; 
+                    margin-top:9px;
+    
+                   
+    
+                    rect {
+                        transition:all .5s ease-in-out;
+                    }
+                }
+    
+                &:hover {
+                    transition:all .5s ease-in-out;
+    
+                    svg {
+                        rect {
+                            fill:$primary;
+                            transition:all .5s ease-in-out;
+
+                            @include small-laptop {
+                                fill:$action;          
+                            }
+                        }
+                    }
+                }
+    
+            }
+
+        }
+
+        
+    
+        
+    
+    }
+
+    
+}
+
+.overlay_menu.false {
+    height:0;
+    transition:all .2s ease;
+
+    .close_btn {
+        display:none;
+    }
+}
+
+.overlay_menu.true {
+    height:100vh;
+    transition:all .4s ease;    
+}

@@ -1,8 +1,84 @@
-const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
 const path = require(`path`)
-const slash = require(`slash`)
+const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
 
-exports.createResolvers = (
+exports.createPages = async ({ graphql, actions }) => {
+  const { createPage } = actions
+
+  const portfolioItem = path.resolve(`./src/templates/portfolio.js`)
+  const pageItem = path.resolve(`./src/templates/page.js`)
+  const postItem = path.resolve(`./src/templates/post.js`)
+
+  const result = await graphql(
+    `
+    {
+      wordPress {
+        portfolio_items {
+          edges {
+            node {
+              id
+              slug              
+            }
+          }
+        }
+        pages {
+          edges {
+            node {
+              id
+              slug              
+            }
+          }
+        }
+        posts {
+          edges {
+            node {
+              id
+              slug              
+            }
+          }
+        }
+      }
+    }
+    `
+  )
+ 
+  if (result.errors) {
+    throw result.errors
+  }
+
+  result.data.wordPress.portfolio_items.edges.map((portfolio) => {
+    createPage({
+      path: portfolio.node.slug,
+      component: portfolioItem,
+      context: {
+        id: portfolio.node.id,
+      },
+    })
+  })
+
+  result.data.wordPress.posts.edges.map((post) => {
+    createPage({
+      path: post.node.slug,
+      component: postItem,
+      context: {
+        id: post.node.id,
+      },
+    })
+  })
+
+  result.data.wordPress.pages.edges.map((page) => {
+    createPage({
+      path: page.node.slug,
+      component: pageItem,
+      context: {
+        id: page.node.id,
+      },
+    })
+  })  
+
+},
+
+
+exports.createResolvers = async (
   {
     actions,
     cache,
@@ -13,112 +89,58 @@ exports.createResolvers = (
   },
 ) => {
   const { createNode } = actions
-  createResolvers({
-    WordPress_MediaItem: {
-      imageFile: {
-        type: `File`,
-        resolve(source, args, context, info) {
-          return createRemoteFileNode({
-            url: source.sourceUrl,
-            store,
-            cache,
-            createNode,
-            createNodeId,
-            reporter,
-          })
+
+  await createResolvers({
+    WPGraphQL_CustomBlocksHeroBlockAttributes: {
+        imageFile: {
+            type: `File`,
+            async resolve(source) {
+            let sourceUrl = source.mediaURL
+
+            return await createRemoteFileNode({
+                url: encodeURI(sourceUrl),
+                store,
+                cache,
+                createNode,
+                createNodeId,
+                reporter,
+            })
+            },
         },
+    },
+    WPGraphQL_CustomBlocksPortfolioheroBlockAttributes: {
+      imageFile: {
+          type: `File`,
+          async resolve(source) {
+          let sourceUrl = source.mediaURL
+
+          return await createRemoteFileNode({
+              url: encodeURI(sourceUrl),
+              store,
+              cache,
+              createNode,
+              createNodeId,
+              reporter,
+          })
+          },
       },
     },
+    WPGraphQL_CoreImageBlockAttributes: {
+        imageFile: {
+            type: `File`,
+            async resolve(source) {
+                let sourceUrl = source.url
+    
+                return await createRemoteFileNode({
+                url: encodeURI(sourceUrl),
+                store,
+                cache,
+                createNode,
+                createNodeId,
+                reporter,
+                })
+            },
+        },
+    }
   })
 }
-
-exports.createPages = async ({ graphql, actions, page }) => {
-    const { createPage } = actions
-    
-    // query content for WordPress posts
-    const result = await graphql(`
-      query workQuery {
-        wordPress {
-          pages {
-            edges {
-              node {
-                uri
-              }
-            }
-          }
-          works {
-            edges {
-                node {
-                  id
-                  slug
-                  title
-                }
-            }
-          }
-          services {
-            edges {
-                node {
-                  id
-                  slug
-                  title
-                }
-            }
-          }
-        }
-      }
-    `)
-    const pageTemplate = path.resolve(`./src/templates/pages.js`)
-
-      result.data.wordPress.pages.edges.forEach(edge => {
-
-        const nodeUri = `${edge.node.uri}`;
-
-        switch (nodeUri) {
-          case 'about':
-            break;
-          case 'contact':
-            break;
-          default:
-            createPage({
-              path: nodeUri,
-              component: slash(pageTemplate),
-              context: {
-                  uri: nodeUri,
-              },
-            })
-          }
-      })
-    
-    const postTemplate = path.resolve(`./src/templates/workpost.js`)
-    result.data.wordPress.works.edges.forEach(edge => {
-      createPage({
-        // will be the url for the page
-        path: `work/${edge.node.slug}`,
-        // specify the component template of your choice
-        component: slash(postTemplate),
-        // In the ^template's GraphQL query, 'id' will be available
-        // as a GraphQL variable to query for this posts's data.
-        context: {
-            ID: edge.node.id,
-            slug: edge.node.slug,
-        },
-      })
-    })
-
-    const serviceTemplate = path.resolve(`./src/templates/servicepost.js`)
-    result.data.wordPress.services.edges.forEach(edge => {
-      createPage({
-        // will be the url for the page
-        path: `services/${edge.node.slug}`,
-        // specify the component template of your choice
-        component: slash(serviceTemplate),
-        // In the ^template's GraphQL query, 'id' will be available
-        // as a GraphQL variable to query for this posts's data.
-        context: {
-            ID: edge.node.id,
-            slug: edge.node.slug,
-        },
-      })
-    })
-
-  }

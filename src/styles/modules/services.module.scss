@@ -1,0 +1,24 @@
+@import "../variables/colors";
+@import "../variables/breakpoints";
+@import "../variables/typography";
+
+
+.service_inner {
+    column-count: 2;
+    column-gap:10vw;
+
+    @include large-phone {
+        column-count: 1;           
+    }
+    
+    .service_block {
+        margin-bottom:6vw;
+        break-inside: avoid;
+
+        h1 {
+            font-weight:700;
+            line-height:150%;
+            font-size:var(--normal-subtitle); 
+        }
+    }
+}

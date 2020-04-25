@@ -1,94 +1,133 @@
 @import "../variables/colors";
 @import "../variables/breakpoints";
+@import "../variables/typography";
 
-.footer__top {
+.footer {
+    background:$secondary-gradient;
+    margin:var(--margin);
+    padding:var(--padding);
     display:flex;
-    width:90vw;
-    margin:20vh auto;
-    
-    .footer__top_contact {
-        width:43%;
+    justify-content:space-between;
 
-        .footer__top_contact_info {
-            white-space: pre-wrap;
-            font-size:1.6rem;
-            font-weight:300;
-            margin:20px 0;
-            line-height:170%;
+    @include large-phone {
+        display:block;           
+    }
+
+    .contact {
+        strong{
+            font-size:75%;
         }
     }
 
-    .footer__top_services {
-        width:35%;
-    }
+    .services {
+        text-align:right;
 
-    .footer__top_links {
-        width:22%;
-    }
-}
+        @include large-phone {
+            text-align:left;           
+        }
 
-.footer__bottom {
-    background:$light-grey;
-    padding:4vw;
-
-    display:flex;
-    justify-content: space-between;
-
-    @include phone {
-        display:block;
-    }
-
-    .footer__logo {
-        display:flex;
-        
-        @include phone {
+        a {
             display:block;
-            padding:50px 0 0 0;
+            line-height:170%; 
+            font-weight:100;
+            font-size:var(--small-p);
+           
         }
-        
-        .footer__logo_icon {
-            width:123px;
-            margin-right:10px;
+    }
+
+    .social {
+        margin-top:100px;
+        text-align:right;
+
+        @include large-phone {
+            text-align:left;           
+        }
+
+        .social_icon {
+            margin-left:30px;
+
+            @include large-phone {
+                margin:0 30px 0 0;           
+            }
             
-            filter: invert(.8);
+            svg {
+                path {
+                    transition:fill .5s ease;
+                }
+            }
 
-            @include phone {
-                width:100px;
-                margin:20px auto;
-                display:block;
+            &:hover {
+                svg {
+                    path {
+                        fill:$action;
+                        transition:fill .5s ease;
+                    }
+                }
             }
         }
-
-        .footer__logo_text {
-            display:block;
-
-            .footer__logo_title {
-                font-size:2.4rem;
-                font-weight:900;
-                margin:5px 0 0 0;
-
-                @include phone {
-                    text-align:center;
-                    font-size:2.2rem;
-                    margin:30px 0 0 0;
-                }
-    
-            }
-    
-            .footer__logo_subtitle {
-                font-size:1.4rem;
-                font-weight:400;
-                color:#B8B8B8;
-                margin:10px 0 0 10px;
-                
-                @include phone {
-                    text-align:center;
-                    margin:15px 0 0 10px;
-                }
-    
-            }
-        }
-        
     }
 
+    .copyright {
+        margin-top:30px;
+        
+        p {
+            font-size:1.2rem;
+        }
+    }
+
+    .page_links {
+        text-align:right;
+        margin-top:-40px;
+
+        @include large-phone {
+            text-align:left;
+            margin-top:-20px;           
+        }
+
+        .link {
+            font-size:1.2rem;
+            font-weight:100;
+            transition:color .3s ease;
+            
+            &:after {
+                margin:0 10px;
+                content:"|";
+
+            }
+
+            &:hover:after {
+                color:$primary;
+            }
+
+            &:last-child:after {
+                margin:0;
+                content:"";
+            }
+
+            &:hover {
+                color:$action;
+                transition:color .3s ease;
+            }
+        }
+    }
+
+    h2 {
+        font-size:2.2rem;
+        margin-bottom:15px;
+    }
+
+    a {
+        text-decoration:none;
+        
+        p {
+            margin:5px 0;
+        }
+    }
+
+    p {
+        font-size:var(--small-p);
+        line-height:170%;
+
+        
+    }    
 }

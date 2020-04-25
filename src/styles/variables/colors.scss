@@ -1,12 +1,29 @@
-$blue:#32B5CA;
-$pink:#FE5862;
-$yellow:#FFDB59;
+$primary:#050041;
+
+$secondary:#9CDEF2;
+$secondary-gradient:linear-gradient(132.23deg, rgba(255, 255, 255, 0) -7.92%, rgba(156, 222, 242, 0.5) 98.86%), #E9FBFF;  
+
+$action:#FE5862;
+$action-gradient:linear-gradient(159.13deg, #FF5C97 10.8%, rgba(254, 88, 98, 0) 83.19%), #FE5862; 
+
+$grey:#F2F2F2;
+
 $white:#ffffff;
-$dark-grey:#333333;
-$light-grey:#F2F2F2;
-$black:#000000;
 
 html {
-  color:$dark-grey;
+  color:$primary;
 }
 
+a {
+  color:$primary;
+  transition: color .5s ease;
+
+  &:hover {
+    transition: color .5s ease;
+    color:$action;
+  }
+
+  &:visited {
+    color:$primary;
+  }
+}
