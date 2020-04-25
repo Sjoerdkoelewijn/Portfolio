@@ -12,7 +12,7 @@ var plugins = [{
       options: {"plugins":[],"fonts":[{"family":"Heebo","variants":["300","400","500","800","900"]}]},
     },{
       plugin: require('D:/development/Portfolio/Gatsby/node_modules/gatsby-plugin-offline/gatsby-ssr'),
-      options: {"plugins":[],"precachePages":["/about/","/contact/","/services/*","/portfolio/*"]},
+      options: {"plugins":[],"precachePages":["/","/contact/","/portfolio/*"]},
     }]
 // During bootstrap, we write requires at top of this file which looks like:
 // var plugins = [
