@@ -22,3 +22,17 @@
         }
     }
 }
+
+.servicepage {
+    margin:var(--margin);
+    padding:var(--padding);
+    background:$secondary-gradient;
+
+    h1 {
+        margin-top:var(--vertical-spacing-l);
+    }
+
+    p {
+        width:70%;
+    }
+}

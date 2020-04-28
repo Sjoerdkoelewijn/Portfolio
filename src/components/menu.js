@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useStaticQuery, graphql, Link } from "gatsby";
+import { Link } from "gatsby";
 import styles from "../styles/modules/menu.module.scss";
 import BurgerIcon from "../components/icons/burgerIcon";
 import Logo from "../components/icons/logo";

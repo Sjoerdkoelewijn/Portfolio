@@ -35,7 +35,7 @@ module.exports = {
         fieldName: `wordPress`,
         // GraphQL endpoint, relative to your WordPress home URL.
         url: `https://api.sjoerdkoelewijn.com/graphql`,
-        //refetchInterval: 60,
+        refetchInterval: 60,
         batch: true,
       },
     },

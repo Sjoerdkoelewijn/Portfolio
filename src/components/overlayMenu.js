@@ -3,6 +3,7 @@ import { useStaticQuery, graphql, Link } from "gatsby";
 import styles from "../styles/modules/menu.module.scss";
 import CloseIcon from "../components/icons/closeIcon";
 import SocialMenu from "../components/socialMenu";
+import SecondaryMenu from "../components/secondaryMenu";
 import Logo from "../components/icons/logo";
 
 const OverlayMenu = ({ menuOpen, callback }) => {
@@ -10,7 +11,8 @@ const OverlayMenu = ({ menuOpen, callback }) => {
     query getOverlayMenu{
         wordPress {
             microcopySettings {
-                mcMenuText
+                mcMenuTextTop
+                mcMenuTextBottom
             }
             menuItems(where: {location: MAIN_NAVIGATION}) {
                 nodes {
@@ -49,7 +51,7 @@ const OverlayMenu = ({ menuOpen, callback }) => {
 
                         {data.wordPress.menuItems.nodes.map(node => {
 
-                        const wpurl = `https://api.sjoerdkoelewijn.local`
+                        const wpurl = `https://api.sjoerdkoelewijn.com`
                         const onlyPath = node.url.replace(wpurl, ``)
 
                             return (
@@ -63,8 +65,12 @@ const OverlayMenu = ({ menuOpen, callback }) => {
                         })}
 
                     <SocialMenu />
+                    
+                    <SecondaryMenu /> 
 
                     </div>
+
+                    
 
                 </div>
 
@@ -73,14 +79,11 @@ const OverlayMenu = ({ menuOpen, callback }) => {
                     <div className={styles.text_area}>
 
                         <p>
-                            {`I'm a freelance designer, web-developer and digital marketing professional.`}
+                            {mc.mcMenuTextTop}
                         </p>
                         <p>
-                            {`I use design, marketing and technical know-how to and create fast and efficient websites.`}
-                        </p>
-                        <p>
-                            {`Let's talk about your next project.`}    
-                        </p>
+                            {mc.mcMenuTextBottom}
+                        </p>                        
        
                         <SocialMenu />
 
