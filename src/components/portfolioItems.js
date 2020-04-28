@@ -12,20 +12,23 @@ const PortfolioItems = () => {
                     node {
                         slug
                         title
+                        featuredImage {
+                            altText
+                            mediaItemUrl
+                            imageFile {
+                                childImageSharp {
+                                    fluid(quality: 90, maxWidth: 960) {
+                                        ...GatsbyImageSharpFluid_withWebp
+                                    }
+                                }
+                            }
+                        }                        
                         blocks {
                             ... on WPGraphQL_CustomBlocksPortfolioheroBlock {
                                 attributes {
                                     websiteURL
                                     website
-                                    title
-                                    mediaURL
-                                    imageFile {
-                                        childImageSharp {
-                                        fluid(quality: 90, maxWidth: 960) {
-                                            ...GatsbyImageSharpFluid_withWebp
-                                        }
-                                        }
-                                    }
+                                    title                                    
                                 }
                             }
                         }
@@ -57,20 +60,20 @@ const PortfolioItems = () => {
                                 
                                 <>
 
-                                    <Link to={item.node.slug} className={styles.link}>
+                                    <Link to={`/portfolio/${item.node.slug}`} className={styles.link}>
 
                                         <BackgroundImage 
                                             Tag="section"
                                             className={styles.image}
-                                            fluid={block.attributes.imageFile.childImageSharp.fluid}
+                                            fluid={item.node.featuredImage.imageFile.childImageSharp.fluid}
                                             backgroundColor={`#f2f2f2`}
                                             >
                                         </BackgroundImage>
 
                                     </Link> 
 
-                                    <Link to={item.node.slug} className={styles.link}>
-
+                                    <Link to={`/portfolio/${item.node.slug}`} className={styles.link}>
+                                    
                                         <h1
                                         dangerouslySetInnerHTML={{
                                             __html: item.node.title,

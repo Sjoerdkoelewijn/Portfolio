@@ -1,10 +1,10 @@
 import React from 'react';
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 import styles from '../../styles/modules/blocks/portfoliohero.module.scss';
 
 import Menu from '../menu';
 import ArrowDownIcon from '../icons/arrowDownIcon';
-import BackgroundImage from 'gatsby-background-image';
+import Img from 'gatsby-image';
 
 export const fragment = graphql`
   fragment CustomPortfolioHero on WPGraphQL_CustomBlocksPortfolioheroBlock {
@@ -16,12 +16,12 @@ export const fragment = graphql`
       mediaURL
       imageFile {
         childImageSharp {
-          fluid(quality: 90, maxWidth: 960) {
-            ...GatsbyImageSharpFluid_withWebp
+          fluid(maxWidth:960) {
+            ...GatsbyImageSharpFluid
           }
         }
       }
-    }   
+    }       
   }
 `;
 
@@ -30,40 +30,92 @@ const PortfolioHero = ({attributes}) => {
 
     return (
 
+      <>
+
       <article className={styles.hero}>
 
-        <div className={styles.text_area}>
+        <Menu />
 
-          <Menu />
+        <div className={styles.content_wrap}>
 
-          {attributes.website &&
-            <a className={styles.website} href={attributes.websiteURL}>
-              {attributes.website}
-            </a>
-          }
-                    
-          <h1 className={styles.header}>
-            {attributes.title}
-          </h1>
-          <p
-              dangerouslySetInnerHTML={{
-                __html: attributes.introduction,
-            }}
-          />
+          <div className={styles.text_area}>
 
-        </div>  
+            {attributes.website &&
+              <a className={styles.website} href={attributes.websiteURL}>
+                {attributes.website}
+              </a>
+            }
+                      
+            <h1 className={styles.header}>
+              {attributes.title}
+            </h1>
 
-        <BackgroundImage 
-          Tag="section"
-          className={styles.hero_image}
-          fluid={attributes.imageFile.childImageSharp.fluid}
-          backgroundColor={`#CAEFFA`}
-          >
-        </BackgroundImage>
+          </div>
 
-        <ArrowDownIcon />
+          <div className={styles.image_area}>
 
-      </article>        
+            <Img 
+              Tag="section"
+              className={styles.hero_image}
+              fluid={attributes.imageFile.childImageSharp.fluid}
+              backgroundColor={`#CAEFFA`}
+              >
+            </Img>
+
+          </div>   
+
+        </div>               
+
+      </article>
+
+      <ArrowDownIcon />
+
+      <div className={styles.introduction}>
+      
+        <p className={styles.text_area}
+            dangerouslySetInnerHTML={{
+              __html: attributes.introduction,
+          }}
+        />
+
+        <ul className={styles.meta}>
+          <li>
+            <p>
+              <strong>
+                Client.
+              </strong>
+              The city of Elburg
+            </p>  
+          </li>
+          <li>
+            <p>
+              <strong>
+                Role.
+              </strong>
+              Designer & developer
+            </p> 
+          </li>
+          
+          <li className={styles.service_links}>
+            {post.relationship.typeOfWork.map(service => {
+
+              return(
+              <Link className={styles.service_link} to={service.slug}>
+                {service.title}
+              </Link>
+
+            )
+
+            })}           
+          </li>
+          
+        </ul>
+
+      </div>
+
+         
+
+      </>        
                 
 )};
 

@@ -23,15 +23,15 @@
 
     --large-title:5rem;
     --normal-title:3.7rem;
-    --small-title:3.4rem;
+    --small-title:3rem;
 
     --large-subtitle:2.8rem;
     --normal-subtitle:2.4rem;
     --small-subtitle:1.7rem;
 
     --large-p:2.4rem;
-    --normal-p:2rem;
-    --small-p:1.7rem;
+    --normal-p:1.8rem;
+    --small-p:1.4rem;
 
     --quote-size:4rem;
 
@@ -42,17 +42,19 @@
 @include large-laptop {
     :root {
 
-        --large-title:5rem;
-        --normal-title:4rem;
-        --small-title:3.5rem;
+        --large-title:4.6rem;
+        --normal-title:3.5rem;
+        --small-title:2.8rem;
     
-        --large-subtitle:4rem;
-        --normal-subtitle:2.2rem;
-        --small-subtitle:1.8rem;
+        --large-subtitle:2.8rem;
+        --normal-subtitle:2.4rem;
+        --small-subtitle:1.7rem;
 
-        --large-p:2.2rem;
+        --large-p:2.4rem;
         --normal-p:1.8rem;
-        --small-p:1.5rem;
+        --small-p:1.4rem;
+
+        --quote-size:4rem;
 
     }
 }
@@ -60,19 +62,19 @@
 @include small-laptop {
     :root {
 
-        --large-title:5rem;
-        --normal-title:3.5rem;
-        --small-title:3.5rem;
+        --large-title:4.6rem;
+        --normal-title:2.6rem;
+        --small-title:2.5rem;
     
-        --large-subtitle:4rem;
-        --normal-subtitle:2.2rem;
-        --small-subtitle:1.8rem;
+        --large-subtitle:2.5rem;
+        --normal-subtitle:2.4rem;
+        --small-subtitle:1.7rem;
 
-        --large-p:2.2rem;
+        --large-p:2.4rem;
         --normal-p:1.6rem;
-        --small-p:1.4rem;
+        --small-p:1.2rem;
 
-        --quote-size:3rem;
+        --quote-size:4rem;
 
     }
 }
@@ -90,7 +92,7 @@
 
         --large-p:2.2rem;
         --normal-p:1.6rem;
-        --small-p:1.4rem;
+        --small-p:1.2rem;
 
         --quote-size:2.5rem;
 
@@ -110,7 +112,7 @@
 
         --large-p:2.2rem;
         --normal-p:1.5rem;
-        --small-p:1.4rem;
+        --small-p:1.2rem;
 
         --quote-size:1.5rem;
 

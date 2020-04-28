@@ -1,5 +1,5 @@
 import React from "react";
-import { graphql } from "gatsby";
+import { graphql, Link } from "gatsby";
 import Layout from "../components/layout";
 import styles from "../styles/modules/portfolio.module.scss";
 
@@ -12,7 +12,11 @@ import NoImageHero from "../components/blocks/noimagehero";
 import PortfolioPosts from "../components/blocks/portfolioposts";
 import ServicesPosts from "../components/blocks/servicesposts";
 import Hero from "../components/blocks/hero";
-import PortfolioHero from "../components/blocks/portfoliohero";
+
+import Menu from '../components/menu';
+import ArrowDownIcon from '../components/icons/arrowDownIcon';
+import LinkIcon from '../components/icons/linkIcon';
+import Img from 'gatsby-image';
 
 export const query = graphql`
   query getPortfolioItem($id: ID!) {
@@ -22,7 +26,22 @@ export const query = graphql`
         title
         blocks {
           __typename
-          ...CustomPortfolioHero
+          ... on WPGraphQL_CustomBlocksPortfolioheroBlock {
+            attributes {
+              title
+              introduction
+              website
+              websiteURL
+              mediaURL
+              imageFile {
+                childImageSharp {
+                  fluid(maxWidth:960) {
+                    ...GatsbyImageSharpFluid
+                  }
+                }
+              }
+            }
+          }          
           ...CustomHero
           ...CustomServicesPosts
           ...CustomPortfolioPosts
@@ -31,6 +50,15 @@ export const query = graphql`
           ...CoreParagraphBlock
           ...CoreImageBlock
           ...CoreQuoteBlock
+        }
+        relationship {
+          typeOfWork {
+            ... on WPGraphQL_Service {
+              id
+              slug
+              title
+            }
+          }
         }
       }
     }
@@ -53,7 +81,78 @@ const PortfolioItem = ({ data }) => {
 
           switch (typeName) {
             case 'WPGraphQL_CustomBlocksPortfolioheroBlock' :
-              return <span className={styles.CustomPortfolioHero}><PortfolioHero key={block.id} {...block} /></span>;
+              return (
+                <>
+
+                  <article className={styles.hero}>
+
+                    <Menu />
+
+                    <div className={styles.content_wrap}>
+
+                      <div className={styles.text_area}>
+
+                        {block.attributes.website &&
+                          <a className={styles.website} href={block.attributes.websiteURL}>
+                            <LinkIcon /> {block.attributes.website}
+                          </a>
+                        }
+                                  
+                        <h1 className={styles.header}>
+                          {block.attributes.title}
+                        </h1>
+
+                      </div>
+
+                      <div className={styles.hero_image_area}>
+
+                        <Img 
+                          Tag="section"
+                          className={styles.hero_image}
+                          fluid={block.attributes.imageFile.childImageSharp.fluid}
+                          backgroundColor={`#CAEFFA`}
+                          >
+                        </Img>
+
+                      </div>   
+
+                    </div>               
+
+                  </article>
+
+                  <ArrowDownIcon />
+
+                  <div className={styles.introduction}>
+
+                    <p className={styles.text_area}
+                        dangerouslySetInnerHTML={{
+                          __html: block.attributes.introduction,
+                      }}
+                    />
+
+                    <ul className={styles.meta}>
+                      
+                      <li className={styles.service_links}>
+                        
+                        {post.relationship.typeOfWork.map(service => {
+
+                          return(
+                          <Link className={styles.service_link} to={`/services/${service.slug}`}>
+                            {service.title}
+                          </Link>
+
+                        )
+
+                        })}           
+                      </li>
+                      
+                    </ul>
+
+                  </div>
+
+                </>
+
+              );
 
             case 'WPGraphQL_CustomBlocksHeroBlock' :
               return <span className={styles.CustomHero}><Hero key={block.id} {...block} /></span>;
