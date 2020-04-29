@@ -121,7 +121,11 @@
                 }
 
                 .secondary_menu {  
-                    margin-top:var(--vertical-spacing-l);              
+                    margin-top:var(--vertical-spacing-l);  
+                    
+                    @include small-laptop {
+                        display:none;   
+                    } 
                 
                     .menu_link {
                         color:$grey;
@@ -176,7 +180,13 @@
                     width:37%;
                     align-self: flex-end;
                     text-align:right;
-                    text-shadow: 2px 2px 2px rgba(200, 40, 50, 0.3);
+                    text-shadow: 2px 2px 2px rgba(200, 40, 50, 0.3);     
+                    
+                    @include large-laptop {
+                        margin-bottom:20px;
+                        font-size:var(--small-p);
+                        width:40%;
+                    }  
 
                     @include small-laptop {
                         width:60%;   
@@ -187,12 +197,6 @@
                     }
                 }
 
-                p:nth-of-type(2) {
-                    @include large-laptop {
-                        margin-bottom:0;    
-                    }                    
-                }                            
-    
                 .social_menu {
                     display:inline-block;
                     align-self: flex-end;

@@ -140,6 +140,28 @@
                 width:80px;
                 display: inline-block;
             }
+
+            .role {
+                
+                &:before {
+                    content:',';
+                    margin-right:8px;
+                }
+
+                &:first-of-type:before {
+                    content:'';
+                    margin-right:0;
+                }
+
+                &:last-of-type:before {
+                    content:'&';
+                    margin-left:8px;
+                }
+
+                &:last-of-type:after {
+                    content:'.';                    
+                }
+            }
     
             .service_links {
                 margin-top:20px;
