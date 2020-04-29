@@ -21,7 +21,7 @@ import Img from 'gatsby-image';
 export const query = graphql`
   query getPortfolioItem($id: ID!) {
     wordPress {
-      portfolio_itemBy(id: $id) {
+      portfolio_item(id: $id) {
         id
         title
         blocks {
@@ -51,6 +51,13 @@ export const query = graphql`
           ...CoreImageBlock
           ...CoreQuoteBlock
         }
+        portfolioCategories {
+          edges {
+            node {
+              name
+            }
+          }
+        }
         relationship {
           typeOfWork {
             ... on WPGraphQL_Service {
@@ -61,13 +68,18 @@ export const query = graphql`
           }
         }
       }
+      microcopySettings {
+        mcClient
+        mcRole
+      }
     }
   }
 `;
 
 const PortfolioItem = ({ data }) => {
-  const post = data.wordPress.portfolio_itemBy;
+  const post = data.wordPress.portfolio_item;
   const blocks = post.blocks;
+  const mc = data.wordPress.microcopySettings
   
   return (
 
@@ -131,6 +143,39 @@ const PortfolioItem = ({ data }) => {
                     />
 
                     <ul className={styles.meta}>
+
+                      <li>
+                        <p>
+                          <strong>
+                            {mc.mcClient}
+                          </strong>
+                          <span dangerouslySetInnerHTML={{
+                                __html: post.title,
+                            }}
+                          />
+                        </p>  
+                      </li>
+
+                        {post.portfolioCategories.edges &&
+                          <li>
+                            <p>
+                              <strong>
+                                {mc.mcRole}
+                              </strong>
+                              
+                              {post.portfolioCategories.edges.map(cat => {
+
+                                return(
+                                  <span className={styles.role}>
+                                    {cat.node.name}     
+                                  </span>
+                                )                                                         
+
+                              })}  
+                              
+                            </p> 
+                          </li>
+                        }
                       
                       <li className={styles.service_links}>
                         
