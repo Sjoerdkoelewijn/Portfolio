@@ -9,7 +9,8 @@
     padding:var(--padding);
 
     .intro_text {
-        margin-bottom:8vw;
+        
+        margin:var(--vertical-spacing-m) 0 var(--vertical-spacing-l) 0;
         width:70%;
     
         @include large-phone {
