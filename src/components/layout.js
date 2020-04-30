@@ -2,6 +2,7 @@ import React from 'react';
 import { StaticQuery, graphql } from "gatsby";
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
+import OpenGraphImage from '../images/og-image.jpg'
 
 const Layout = ({ children }) => (
   <StaticQuery query={graphql`
@@ -13,9 +14,20 @@ const Layout = ({ children }) => (
             generalSettingsLanguage
           }
         }
+        site {
+          siteMetadata {
+            author
+            url            
+            twitterUsername
+          }
+        }
       }
     `}
-    render={data => (
+    render={data => {
+      
+
+
+      return (
 
       <>
 
@@ -24,11 +36,11 @@ const Layout = ({ children }) => (
               <html lang="en" />
               <title>{data.wordPress.allSettings.generalSettingsTitle}</title>
               <meta name="description" content={data.wordPress.allSettings.generalSettingsDescription} />
-              <meta name="author" content="Sjoerd Koelewijn" /> 
+              <meta name="author" content={data.site.siteMetadata.author} /> 
               <meta property="og:title" content={data.wordPress.allSettings.generalSettingsTitle} />
               <meta property="og:type" content="website" />
-              <meta property="og:url" content="https://sjoerdkoelewijn.com" />
-              <meta property="og:image" content="https://sjoerdkoelewijn.com/images/og-image.jpg" />
+              <meta property="og:url" content={data.site.siteMetadata.url} />
+              <meta property="og:image" content={OpenGraphImage} />
               <meta property="og:description" content={data.wordPress.allSettings.generalSettingsDescription} />             
 
           </Helmet>
@@ -39,7 +51,7 @@ const Layout = ({ children }) => (
       
       </>
 
-    )}
+    )}}
 
   />
 )

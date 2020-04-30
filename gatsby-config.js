@@ -3,9 +3,11 @@ require('dotenv').config()
 module.exports = {
   siteMetadata: {
     title: `Sjoerd Koelewijn Portfolio`,
-    description: `Simple static blog theme that uses wpgraphql and gutenberg.`,
-    author: `@sjoerdkoelewijn`,
-    siteUrl: `https://sjoerdkoelewijn.com`,
+    description: `Sjoerd Koelewijn is freelance designer, webdeveloper and online marketer from Amsterdam. He specializes in designing and building fast websites.`,
+    author: `Sjoerd Koelewijn`,
+    url: `https://sjoerdkoelewijn.com`,
+    twitterUsername: `@sjoerdkoelewijn`,
+    OGimage: `/images/og-image.jpg`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
