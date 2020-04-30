@@ -19,12 +19,12 @@ const Layout = ({ children }) => (
 
       <>
 
-          <Helmet htmlAttributes={{ lang: data.wordPress.allSettings.generalSettingsLanguage }}>
-           
+          <Helmet>
+
+              <html lang="en" />
               <title>{data.wordPress.allSettings.generalSettingsTitle}</title>
               <meta name="description" content={data.wordPress.allSettings.generalSettingsDescription} />
               <meta name="author" content="Sjoerd Koelewijn" /> 
-
               <meta property="og:title" content={data.wordPress.allSettings.generalSettingsTitle} />
               <meta property="og:type" content="website" />
               <meta property="og:url" content="https://sjoerdkoelewijn.com" />
