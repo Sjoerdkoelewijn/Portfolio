@@ -84,7 +84,7 @@ const PortfolioItem = ({ data }) => {
   return (
 
     <Layout>
-
+      
       <article className={styles.portfolio}>
              
         {blocks.map(block => {
