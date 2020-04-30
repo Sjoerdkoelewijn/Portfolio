@@ -10,6 +10,7 @@ const Layout = ({ children }) => (
           allSettings {
             generalSettingsTitle
             generalSettingsDescription
+            generalSettingsLanguage
           }
         }
       }
@@ -18,7 +19,7 @@ const Layout = ({ children }) => (
 
       <>
 
-          <Helmet>
+          <Helmet htmlAttributes={{ lang: data.wordPress.allSettings.generalSettingsLanguage }}>
            
               <title>{data.wordPress.allSettings.generalSettingsTitle}</title>
               <meta name="description" content={data.wordPress.allSettings.generalSettingsDescription} />
