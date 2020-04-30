@@ -26,6 +26,9 @@
     .menu_btn {
         cursor:pointer;
         margin-top:10px;
+        border:0;
+        padding:0;
+        background:none;
 
         svg {
             rect {
@@ -38,7 +41,7 @@
             svg {
                 rect {
                     transition:all .5s ease-in-out;
-                    fill:$primary;
+                    fill:$action;
                 }                
             }  
         }
@@ -252,7 +255,9 @@
             .close_btn {                     
                 cursor:pointer;
                 transition:all .5s ease-in-out;
-                               
+                border:0;
+                margin:0;
+                background:none;                              
     
                 svg {
                     width:30px;

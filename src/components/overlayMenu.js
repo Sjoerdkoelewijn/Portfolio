@@ -36,12 +36,16 @@ const OverlayMenu = ({ menuOpen, callback }) => {
                 <div className={styles.logo_close_wrap}>
                 
                     <div className={styles.logo} aria-label="logo">
+
                         <Logo />                       
+                    
                     </div>
                     
-                    <div className={styles.close_btn} role="button" aria-label="close" onClick={callback} tabIndex="0" onKeyDown={callback}>
-                        <CloseIcon />                       
-                    </div>
+                    <button className={styles.close_btn} aria-label="Close Menu" onClick={callback} tabIndex="0" onKeyDown={callback}>
+                        
+                        <CloseIcon />  
+
+                    </button>
 
                 </div>
 

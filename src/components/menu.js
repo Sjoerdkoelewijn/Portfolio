@@ -18,35 +18,38 @@ const Menu = () => {
 
     <Location>
 
-    {({ location }) =>
+        {({ location }) =>
 
-        <>
+            <>
 
-        <div className={styles.menu}>
-            
-            {location.pathname !== '/contact' &&
+                <div className={styles.menu}>
+                    
+                    {location.pathname !== '/contact' &&
 
-                <Link to={`/`} className={styles.logo}>
-                    <Logo />                    
-                </Link>
+                        <Link aria-label="Back to index" to={`/`} tabIndex="0" className={styles.logo}>
 
-            }
+                            <Logo />    
 
-            <div className={styles.menu_btn} onClick={handleOverlayMenu}>
-                <BurgerIcon />                   
-            </div>
-        
-        </div>
+                        </Link>
 
-        <OverlayMenu menuOpen={menuOpen} callback={handleOverlayMenu} />    
+                    }
 
-        </>
-    }    
+                    <button aria-label="Menu button" className={styles.menu_btn} onClick={handleOverlayMenu} tabIndex="0" onKeyDown={handleOverlayMenu}>
+
+                        <BurgerIcon />  
+
+                    </button>
+                
+                </div>
+
+                <OverlayMenu menuOpen={menuOpen} callback={handleOverlayMenu} />    
+
+            </>
+        }
+
     </Location>
 
     )
 }
-
-
 
 export default Menu 
