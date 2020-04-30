@@ -5,5 +5,5 @@
  [headers.values]
    X-Frame-Options = "SAMEORIGIN"
    X-XSS-Protection = "1; mode=block"
-   X-Content-Type = "nosniff"
+   X-Content-Type-Options = "nosniff"
    Referrer-Policy = "strict-origin"

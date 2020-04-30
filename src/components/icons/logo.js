@@ -4,7 +4,8 @@ const Logo = () => {
 
     return (
 
-    <svg width="53" height="53" viewBox="0 0 53 53" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg role="img" width="53" height="53" viewBox="0 0 53 53" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <title>Sjoerd Koelewijn Logo</title>
         <rect width="53" height="53" fill="#FE5862"/>
         <path d="M31.447 19.644H40.308L31.447 27.7171H22.5859L31.447 19.644Z" fill="#050041"/>
         <path d="M21.451 24.0657H30.4136L21.451 32.1372H12.4883L21.451 24.0657Z" fill="#050041"/>
