@@ -17,7 +17,7 @@ const Layout = ({ children }) => (
         site {
           siteMetadata {
             author
-            url            
+            siteUrl            
             twitterUsername
           }
         }
@@ -39,7 +39,7 @@ const Layout = ({ children }) => (
               <meta name="author" content={data.site.siteMetadata.author} /> 
               <meta property="og:title" content={data.wordPress.allSettings.generalSettingsTitle} />
               <meta property="og:type" content="website" />
-              <meta property="og:url" content={data.site.siteMetadata.url} />
+              <meta property="og:url" content={data.site.siteMetadata.siteUrl} />
               <meta property="og:image" content={OpenGraphImage} />
               <meta property="og:description" content={data.wordPress.allSettings.generalSettingsDescription} />             
 

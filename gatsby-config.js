@@ -5,7 +5,7 @@ module.exports = {
     title: `Sjoerd Koelewijn Portfolio`,
     description: `Sjoerd Koelewijn is freelance designer, webdeveloper and online marketer from Amsterdam. He specializes in designing and building fast websites.`,
     author: `Sjoerd Koelewijn`,
-    url: `https://sjoerdkoelewijn.com`,
+    siteUrl: `https://sjoerdkoelewijn.com`,
     twitterUsername: `@sjoerdkoelewijn`,
     OGimage: `/images/og-image.jpg`,
   },
