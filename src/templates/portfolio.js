@@ -7,6 +7,7 @@ import ParagraphBlock from "../components/blocks/paragraph";
 import HeadingBlock from "../components/blocks/heading";
 import ImageBlock from "../components/blocks/image";
 import QuoteBlock from "../components/blocks/quote";
+import GalleryBlock from "../components/blocks/gallery";
 
 import NoImageHero from "../components/blocks/noimagehero";
 import PortfolioPosts from "../components/blocks/portfolioposts";
@@ -49,6 +50,7 @@ export const query = graphql`
           ...CoreHeadingBlock
           ...CoreParagraphBlock
           ...CoreImageBlock
+          ...CoreGalleryBlock
           ...CoreQuoteBlock
         }
         portfolioCategories {
@@ -116,20 +118,24 @@ const PortfolioItem = ({ data }) => {
 
                       </div>
 
-                      <div className={styles.hero_image_area}>
+                      {block.attributes.imageFile &&
 
-                        <Img 
-                          Tag="section"
-                          className={styles.hero_image}
-                          fluid={block.attributes.imageFile.childImageSharp.fluid}
-                          backgroundColor={`#CAEFFA`}
-                          >
-                        </Img>
+                        <div className={styles.hero_image_area}>
 
-                      </div>   
+                          <Img 
+                            Tag="section"
+                            className={styles.hero_image}
+                            fluid={block.attributes.imageFile.childImageSharp.fluid}
+                            backgroundColor={`#CAEFFA`}
+                            >
+                          </Img>
 
-                    </div>               
+                        </div>
+                      
+                      }
 
+                    </div>
+                   
                   </article>
 
                   <ArrowDownIcon />
@@ -199,6 +205,9 @@ const PortfolioItem = ({ data }) => {
 
               );
 
+            case 'WPGraphQL_CoreGalleryBlock':
+              return <span className={styles.CoreGalleryBlock}><GalleryBlock key={block.id} {...block} /></span>;  
+
             case 'WPGraphQL_CustomBlocksHeroBlock' :
               return <span className={styles.CustomHero}><Hero key={block.id} {...block} /></span>;
 
@@ -218,13 +227,13 @@ const PortfolioItem = ({ data }) => {
               return <span className={styles.CoreParagraphBlock}><ParagraphBlock key={block.id} {...block} /></span>;
 
             case 'WPGraphQL_CoreImageBlock':
-              return <span className={styles.CoreImageBlock}><ImageBlock key={block.id} {...block} /></span>;
-
+              return <span className={styles.CoreImageBlock}><ImageBlock key={block.id} {...block} /></span>;            
+              
             case 'WPGraphQL_CoreQuoteBlock':
               return <span className={styles.CoreQuoteBlock}><QuoteBlock key={block.id} {...block} /></span>;    
                 
             default :
-              return 'No content yet';  
+              return 'Note: This block needs to be added to the frontend. Please let your developer know.';  
           }     
 
         })}  
