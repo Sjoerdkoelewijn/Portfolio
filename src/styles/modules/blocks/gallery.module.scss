@@ -1,0 +1,31 @@
+@import "../../variables/colors";
+@import "../../variables/breakpoints";
+@import "../../variables/typography";
+@import "../../variables/spacing";
+
+.gallery {
+    column-count: 2;
+    column-gap:3vw;
+
+    @include small-laptop {
+        column-gap:4vw;
+    }
+
+    @include large-phone {
+        column-count: 1;           
+    }
+
+    .image {
+        margin-bottom:3vw;
+        width:100%;
+        box-shadow: $box-shadow;
+        
+        @include small-laptop {
+            margin-bottom:4vw;
+        }
+
+        @include large-phone {
+            margin-bottom:8vw;           
+        }
+    }
+}

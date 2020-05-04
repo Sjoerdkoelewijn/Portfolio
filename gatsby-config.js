@@ -3,9 +3,11 @@ require('dotenv').config()
 module.exports = {
   siteMetadata: {
     title: `Sjoerd Koelewijn Portfolio`,
-    description: `Simple static blog theme that uses wpgraphql and gutenberg.`,
-    author: `@sjoerdkoelewijn`,
+    description: `Sjoerd Koelewijn is freelance designer, webdeveloper and online marketer from Amsterdam. He specializes in designing and building fast websites.`,
+    author: `Sjoerd Koelewijn`,
     siteUrl: `https://sjoerdkoelewijn.com`,
+    twitterUsername: `@sjoerdkoelewijn`,
+    OGimage: `/images/og-image.jpg`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -29,13 +31,10 @@ module.exports = {
     {
       resolve: `gatsby-source-graphql`,
       options: {
-        // Remote schema query type. This is an arbitrary name.
         typeName: `WPGraphQL`,
-        // Field name under which it will be available. Used in your Gatsby query. This is also an arbitrary name.
         fieldName: `wordPress`,
-        // GraphQL endpoint, relative to your WordPress home URL.
         url: `https://api.sjoerdkoelewijn.com/graphql`,
-        refetchInterval: 60,
+        //refetchInterval: 60,
         batch: true,
       },
     },
@@ -83,6 +82,38 @@ module.exports = {
             },
           },
         },
+      },
+    },
+    {
+      resolve: `gatsby-plugin-google-tagmanager`,
+      options: {
+        id: process.env.GTM_ID,
+        includeInDevelopment: false,
+        defaultDataLayer: { platform: "gatsby" },
+      },
+    },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        // The property ID; the tracking code won't be generated without it
+        trackingId: process.env.GA_TRACKING_ID,
+        // Defines where to place the tracking script - `true` in the head and `false` in the body
+        head: false,
+        // Setting this parameter is optional
+        anonymize: true,
+        // Setting this parameter is also optional
+        respectDNT: true,
+        // Avoids sending pageview hits from custom paths
+        exclude: ["/preview/**"],
+        // Delays sending pageview hits on route update (in milliseconds)
+        pageTransitionDelay: 0,
+        // Enables Google Optimize using your container Id
+        optimizeId: process.env.OPTIMIZE_TRACKING_ID,
+        defer: false,
+        // Any additional optional fields
+        sampleRate: 100,
+        siteSpeedSampleRate: 100,
+        cookieDomain: "sjoerdkoelewijn.com",
       },
     },
     `gatsby-plugin-scroll-indicator`,

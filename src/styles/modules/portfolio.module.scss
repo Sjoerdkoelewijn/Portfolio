@@ -148,16 +148,16 @@
                     margin-right:8px;
                 }
 
-                &:first-of-type:before {
-                    content:'';
-                    margin-right:0;
-                }
-
-                &:last-of-type:before {
+                &:last-of-type:before { // This order matters for single category posts. 
                     content:'&';
                     margin-left:8px;
                 }
 
+                &:first-of-type:before { // last-of-type needs to be overwritten by first-of-type. 
+                    content:'';
+                    margin-right:0;
+                }
+                
                 &:last-of-type:after {
                     content:'.';                    
                 }
@@ -234,7 +234,7 @@
         }
 
         .introduction_image {
-            box-shadow: 5px 7px 20px rgba(166, 166, 166, 0.3);
+            box-shadow: $box-shadow;
             max-width: 100%;
 
             @include large-phone {
