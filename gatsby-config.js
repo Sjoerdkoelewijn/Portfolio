@@ -33,7 +33,7 @@ module.exports = {
       options: {
         typeName: `WPGraphQL`,
         fieldName: `wordPress`,
-        url: `http://api.sjoerdkoelewijn.local/graphql`,
+        url: `https://api.sjoerdkoelewijn.com/graphql`,
         refetchInterval: 60,
         batch: true,
       },
@@ -82,6 +82,38 @@ module.exports = {
             },
           },
         },
+      },
+    },
+    {
+      resolve: `gatsby-plugin-google-tagmanager`,
+      options: {
+        id: process.env.GTM_ID,
+        includeInDevelopment: false,
+        defaultDataLayer: { platform: "gatsby" },
+      },
+    },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        // The property ID; the tracking code won't be generated without it
+        trackingId: process.env.GA_TRACKING_ID,
+        // Defines where to place the tracking script - `true` in the head and `false` in the body
+        head: false,
+        // Setting this parameter is optional
+        anonymize: true,
+        // Setting this parameter is also optional
+        respectDNT: true,
+        // Avoids sending pageview hits from custom paths
+        exclude: ["/preview/**"],
+        // Delays sending pageview hits on route update (in milliseconds)
+        pageTransitionDelay: 0,
+        // Enables Google Optimize using your container Id
+        optimizeId: process.env.OPTIMIZE_TRACKING_ID,
+        defer: false,
+        // Any additional optional fields
+        sampleRate: 100,
+        siteSpeedSampleRate: 100,
+        cookieDomain: "sjoerdkoelewijn.com",
       },
     },
     `gatsby-plugin-scroll-indicator`,
