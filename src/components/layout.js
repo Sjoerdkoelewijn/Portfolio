@@ -3,6 +3,7 @@ import { StaticQuery, graphql } from "gatsby";
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import OpenGraphImage from '../images/og-image.jpg'
+import Footer from "./footer";
 
 const Layout = ({ children }) => (
   <StaticQuery query={graphql`
@@ -25,8 +26,6 @@ const Layout = ({ children }) => (
     `}
     render={data => {
       
-
-
       return (
 
       <>
@@ -48,6 +47,8 @@ const Layout = ({ children }) => (
           <main>
             {children}
           </main>
+
+          <Footer />
       
       </>
 

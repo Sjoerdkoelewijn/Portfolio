@@ -15,10 +15,19 @@
         margin-bottom:6vw;
         break-inside: avoid;
 
-        h1 {
+        h2 {
             font-weight:700;
             line-height:150%;
             font-size:var(--normal-subtitle); 
+
+            &:after {
+                content:'.';
+                color:$action;
+            }
+        }
+
+        a {
+            text-decoration: none;
         }
     }
 }

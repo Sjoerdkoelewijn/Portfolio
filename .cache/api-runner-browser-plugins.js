@@ -6,7 +6,7 @@ module.exports = [{
       options: {"plugins":[],"id":"GTM-5RWBB6W","includeInDevelopment":false,"defaultDataLayer":{"type":"object","value":{"platform":"gatsby"}}},
     },{
       plugin: require('../node_modules/gatsby-plugin-google-analytics/gatsby-browser.js'),
-      options: {"plugins":[],"trackingId":"UA-4523109-3","head":false,"anonymize":true,"respectDNT":true,"exclude":["/preview/**"],"pageTransitionDelay":0,"optimizeId":"OPT-MG7R8L9","defer":false,"sampleRate":100,"siteSpeedSampleRate":100,"cookieDomain":"sjoerdkoelewijn.com"},
+      options: {"plugins":[],"trackingId":"UA-4523109-3","head":true,"anonymize":true,"respectDNT":true,"exclude":["/preview/**"],"pageTransitionDelay":0,"optimizeId":"OPT-MG7R8L9","defer":false,"sampleRate":100,"siteSpeedSampleRate":100,"cookieDomain":"sjoerdkoelewijn.com"},
     },{
       plugin: require('../node_modules/gatsby-plugin-scroll-indicator/gatsby-browser.js'),
       options: {"plugins":[]},
