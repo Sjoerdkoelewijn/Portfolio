@@ -29,8 +29,24 @@ const Footer = () => {
     const mc = data.wordPress.microcopySettings
 
     return (
+    
+        <>
 
+        <article class={styles.cta}>
 
+            <h2>
+                {mc.mcCTATitle}
+            </h2>
+            
+            <p>
+                {mc.mcCTASubtitle}
+            </p>
+
+            <Link aria-label="Contact me" className={styles.cta_btn} to="/contact">
+                {mc.mcCTABtn}
+            </Link>
+
+        </article>    
 
         <article class={styles.footer}>
 
@@ -114,6 +130,8 @@ const Footer = () => {
             </div>
 
         </article>
+
+        </>    
 
     )
 }

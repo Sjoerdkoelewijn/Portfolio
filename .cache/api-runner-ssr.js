@@ -6,7 +6,7 @@ var plugins = [{
       options: {"plugins":[],"name":"Sjoerd Koelewijn Portfolio","short_name":"Portfolio","start_url":"/","background_color":"#E9FBFF","theme_color":"#E9FBFF","display":"minimal-ui","icon":"src/images/icon.png"},
     },{
       plugin: require('D:/development/Portfolio/Gatsby/node_modules/gatsby-plugin-sitemap/gatsby-ssr'),
-      options: {"plugins":[]},
+      options: {"plugins":[],"exclude":["/home"]},
     },{
       plugin: require('D:/development/Portfolio/Gatsby/node_modules/gatsby-plugin-prefetch-google-fonts/gatsby-ssr'),
       options: {"plugins":[],"fonts":[{"family":"Heebo","variants":["300","400","500","800","900"]}]},

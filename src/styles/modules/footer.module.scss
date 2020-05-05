@@ -2,6 +2,27 @@
 @import "../variables/breakpoints";
 @import "../variables/typography";
 
+
+.cta {
+    text-align:center;
+    margin:var(--margin);
+    padding:var(--vertical-spacing-l) var(--padding);
+
+    h2 {
+        font-size:var(--normal-title);
+        margin-bottom:10px;
+    }
+
+    p {
+        font-size:var(--normal-subtitle);
+        font-weight:700;
+    }
+
+    .cta_btn {
+       @include button;        
+    }
+}
+
 .footer {
     background:$secondary-gradient;
     margin:var(--margin);
