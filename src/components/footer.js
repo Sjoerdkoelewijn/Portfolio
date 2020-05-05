@@ -3,6 +3,7 @@ import { useStaticQuery, graphql, Link } from "gatsby";
 import styles from "../styles/modules/footer.module.scss";
 import SocialMenu from "./socialMenu";
 import LinksMenu from "./linksMenu";
+import { Location } from '@reach/router'
 
 const Footer = () => {
     const data = useStaticQuery(graphql`
@@ -30,108 +31,120 @@ const Footer = () => {
 
     return (
     
-        <>
+        <Location>
 
-        <article class={styles.cta}>
+        {({ location }) =>
 
-            <h2>
-                {mc.mcCTATitle}
-            </h2>
-            
-            <p>
-                {mc.mcCTASubtitle}
-            </p>
+            <>
 
-            <Link aria-label="Contact me" className={styles.cta_btn} to="/contact">
-                {mc.mcCTABtn}
-            </Link>
+                {location.pathname !== '/contact' &&
 
-        </article>    
+                    <article class={styles.cta}>
 
-        <article class={styles.footer}>
+                        <h2>
+                            {mc.mcCTATitle}
+                        </h2>
+                        
+                        <p>
+                            {mc.mcCTASubtitle}
+                        </p>
 
-            <div className={styles.contact}>
+                        <Link aria-label="Contact me" className={styles.cta_btn} to="/contact">
+                            {mc.mcCTABtn}
+                        </Link>
 
-                <h2>
-                    {mc.mcContact}
-                </h2>
+                    </article>
+                
+                }
 
-                <p>
-                    Sjoerd Koelewijn
-                    <br />
-                    Design & Development
-                    <br />
-                    George Gershwinlaan 458
-                    <br />
-                    1082MT Amsterdam
-                </p>
-                <p>
-                    +31 (0)641 53 72 44
-                    <br /> 
-                    hello@sjoerdkoelewijn.com
-                </p>
-                <p>
-                    KvK: 76343529
-                    <br />
-                    VAT: NL003077108B86
-                </p>
+            <article class={styles.footer}>
 
-            </div>
-
-            <div className={styles.services_wrap}>
-
-                <div className={styles.services}>
+                <div className={styles.contact}>
 
                     <h2>
-                        {mc.mcServices}
+                        {mc.mcContact}
                     </h2>
 
-                    {data.wordPress.menuItems.nodes.map(node => {
+                    <p>
+                        Sjoerd Koelewijn
+                        <br />
+                        Design & Development
+                        <br />
+                        George Gershwinlaan 458
+                        <br />
+                        1082MT Amsterdam
+                    </p>
+                    <p>
+                        +31 (0)641 53 72 44
+                        <br /> 
+                        hello@sjoerdkoelewijn.com
+                    </p>
+                    <p>
+                        KvK: 76343529
+                        <br />
+                        VAT: NL003077108B86
+                    </p>
 
-                    const wpurl = `https://api.sjoerdkoelewijn.com`
-                    const onlyPath = node.url.replace(wpurl, ``)
+                </div>
 
-                        return (
+                <div className={styles.services_wrap}>
+
+                    <div className={styles.services}>
+
+                        <h2>
+                            {mc.mcServices}
+                        </h2>
+
+                        {data.wordPress.menuItems.nodes.map(node => {
+
+                        const wpurl = `https://api.sjoerdkoelewijn.com`
+                        const onlyPath = node.url.replace(wpurl, ``)
+
+                            return (
+                                
+                                <Link key={node.id} aria-label={node.label} to={`/${onlyPath}/`} className={styles.service_link}>
+                                    {node.label}
+                                </Link>
+
+                                
+                            )
+                        })}
+
+                        
+
+                    </div>
+
+                    <div className={styles.soco_wrap}>
+
+                        <div className={styles.social}>
                             
-                            <Link key={node.id} aria-label={node.label} to={`/${onlyPath}/`} className={styles.service_link}>
-                                {node.label}
-                            </Link>
+                            <SocialMenu />
 
-                            
-                        )
-                    })}
+                        </div>
+
+                        <div className={styles.copyright}>
+                            <p>
+                                
+                                © 2019 - {new Date().getFullYear()} Sjoerd Koelewijn Design & Development.                            
+                                
+                            </p>    
+                        </div>
+
+                        <LinksMenu />
+                    
+                    </div>
 
                     
 
                 </div>
 
-                <div className={styles.soco_wrap}>
+            </article>
 
-                    <div className={styles.social}>
-                        
-                        <SocialMenu />
+            </>
 
-                    </div>
+        }
 
-                    <div className={styles.copyright}>
-                        <p>
-                            
-                            © 2019 - {new Date().getFullYear()} Sjoerd Koelewijn Design & Development.                            
-                            
-                        </p>    
-                    </div>
-
-                    <LinksMenu />
-                
-                </div>
-
-                
-
-            </div>
-
-        </article>
-
-        </>    
+    </Location>    
 
     )
 }
