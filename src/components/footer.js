@@ -3,7 +3,7 @@ import { useStaticQuery, graphql, Link } from "gatsby";
 import styles from "../styles/modules/footer.module.scss";
 import SocialMenu from "./socialMenu";
 import LinksMenu from "./linksMenu";
-import { Location } from '@reach/router'
+import { Location } from '@reach/router';
 
 const Footer = () => {
     const data = useStaticQuery(graphql`
