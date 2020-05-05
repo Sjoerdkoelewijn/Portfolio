@@ -6,7 +6,7 @@ var plugins = [{
       options: {"plugins":[],"name":"Sjoerd Koelewijn Portfolio","short_name":"Portfolio","start_url":"/","background_color":"#E9FBFF","theme_color":"#E9FBFF","display":"minimal-ui","icon":"src/images/icon.png"},
     },{
       plugin: require('D:/development/Portfolio/Gatsby/node_modules/gatsby-plugin-sitemap/gatsby-ssr'),
-      options: {"plugins":[]},
+      options: {"plugins":[],"exclude":["/home"]},
     },{
       plugin: require('D:/development/Portfolio/Gatsby/node_modules/gatsby-plugin-prefetch-google-fonts/gatsby-ssr'),
       options: {"plugins":[],"fonts":[{"family":"Heebo","variants":["300","400","500","800","900"]}]},
@@ -15,7 +15,7 @@ var plugins = [{
       options: {"plugins":[],"id":"GTM-5RWBB6W","includeInDevelopment":false,"defaultDataLayer":{"type":"object","value":{"platform":"gatsby"}}},
     },{
       plugin: require('D:/development/Portfolio/Gatsby/node_modules/gatsby-plugin-google-analytics/gatsby-ssr'),
-      options: {"plugins":[],"trackingId":"UA-4523109-3","head":false,"anonymize":true,"respectDNT":true,"exclude":["/preview/**"],"pageTransitionDelay":0,"optimizeId":"OPT-MG7R8L9","defer":false,"sampleRate":100,"siteSpeedSampleRate":100,"cookieDomain":"sjoerdkoelewijn.com"},
+      options: {"plugins":[],"trackingId":"UA-4523109-3","head":true,"anonymize":true,"respectDNT":true,"exclude":["/preview/**"],"pageTransitionDelay":0,"optimizeId":"OPT-MG7R8L9","defer":false,"sampleRate":100,"siteSpeedSampleRate":100,"cookieDomain":"sjoerdkoelewijn.com"},
     },{
       plugin: require('D:/development/Portfolio/Gatsby/node_modules/gatsby-plugin-offline/gatsby-ssr'),
       options: {"plugins":[],"precachePages":["/","/contact/","/portfolio/*"]},

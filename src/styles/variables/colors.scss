@@ -29,3 +29,20 @@ a {
     color:$primary;
   }
 }
+
+@mixin button {
+  display:inline-block;
+  font-size:var(--medium-p);
+  background:$action-gradient;
+  padding:22px 50px;
+  color:$white;
+  text-decoration:none;
+  border-radius:50px;
+  transition: color .2s ease, background .6s ease;
+
+  &:hover {
+      background:$primary;
+      transition: color .2s ease, background .6s ease;
+  } 
+  
+}

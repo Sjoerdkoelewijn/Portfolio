@@ -1,5 +1,5 @@
 import React from "react";
-import { useStaticQuery, graphql } from "gatsby"
+import { useStaticQuery, graphql, Link } from "gatsby"
 import styles from "../styles/modules/services.module.scss";
 
 const ServicesList = () => {
@@ -10,11 +10,8 @@ const ServicesList = () => {
                 edges {
                     node {
                         title
-                        blocks {
-                            ... on WPGraphQL_CoreParagraphBlock {
-                            originalContent
-                            }
-                        }
+                        excerpt
+                        slug
                     }
                 }
             } 
@@ -33,28 +30,19 @@ const ServicesList = () => {
         
                     <article className={styles.service_block}>
         
-                        <h2
-                            dangerouslySetInnerHTML={{
-                                __html: service.node.title,
-                            }}
-                        />
+                        <Link aria-label={service.node.title} to={`/services/${service.node.slug}`}>
+                            <h2
+                                dangerouslySetInnerHTML={{
+                                    __html: service.node.title,
+                                }}
+                            />
+                        </Link> 
         
                         <p
                             dangerouslySetInnerHTML={{
-                                __html: service.node.blocks.originalContent,
+                                __html: service.node.excerpt,
                             }}
-                        />
-
-                        {service.node.blocks.map(block => {
-
-                            return (
-                                <p
-                                dangerouslySetInnerHTML={{
-                                    __html: block.originalContent,
-                                }}
-                                />
-                            )
-                        })}
+                        />                                                
                         
                     </article>
         

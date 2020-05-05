@@ -124,6 +124,7 @@ const PortfolioItem = ({ data }) => {
 
                           <Img 
                             Tag="section"
+                            fadeIn="false"
                             className={styles.hero_image}
                             fluid={block.attributes.imageFile.childImageSharp.fluid}
                             backgroundColor={`#CAEFFA`}
