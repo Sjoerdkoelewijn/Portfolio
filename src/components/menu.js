@@ -18,17 +18,13 @@ const Menu = () => {
         <>
 
             <div className={styles.menu}>
-                
-                {location.pathname !== '/contact' &&
 
-                    <Link aria-label="Back to index" to={`/`} tabIndex="0" className={styles.logo}>
+                <Link aria-label="Back to index" to={`/`} tabIndex="0" className={styles.logo}>
 
-                        <Logo />    
+                    <Logo />    
 
-                    </Link>
-
-                }
-
+                </Link>
+            
                 <button aria-label="Menu button" className={styles.menu_btn} onClick={handleOverlayMenu} tabIndex="0" onKeyDown={handleOverlayMenu}>
 
                     <BurgerIcon />  
