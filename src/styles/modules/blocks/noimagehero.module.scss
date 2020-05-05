@@ -16,6 +16,10 @@
 
         p {
             width:50%;
+
+            @include large-phone {
+                width:100%;           
+            }
         }
 
         
