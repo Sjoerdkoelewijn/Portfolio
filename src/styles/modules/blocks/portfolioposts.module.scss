@@ -5,6 +5,11 @@
 
 .portfolio { 
 
+    .menu_wrap {
+        margin-bottom:var(--vertical-spacing-l);
+        //margin-top:calc(var(--padding) * -1);
+    }
+
     .intro_text {
         margin:calc(var(--margin) + var(--padding));
 

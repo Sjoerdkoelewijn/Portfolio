@@ -1,3 +1,5 @@
+@import "./breakpoints";
+
 $primary:#050041;
 
 $secondary:#E9FBFF;
@@ -34,7 +36,7 @@ a {
   display:inline-block;
   font-size:var(--medium-p);
   background:$action-gradient;
-  padding:22px 50px;
+  padding:20px 56px;
   color:$white;
   text-decoration:none;
   border-radius:50px;
@@ -44,5 +46,9 @@ a {
       background:$primary;
       transition: color .2s ease, background .6s ease;
   } 
+
+  @include phone {
+    padding:15px 45px; 
+  }
   
 }
