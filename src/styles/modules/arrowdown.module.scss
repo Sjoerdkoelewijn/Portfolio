@@ -3,7 +3,14 @@
 
 .ArrowDownIcon {
     position:absolute;
+    left:50%;
     margin-left:-16px;
-    bottom:25vh;
-    animation: arrowDown 3s infinite;
+    bottom:20vh;
+    animation: arrowDown 4s infinite;
+
+    svg {
+        path {
+            fill:$white;
+        }
+    }
 }

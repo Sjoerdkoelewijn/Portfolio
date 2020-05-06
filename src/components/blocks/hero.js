@@ -1,7 +1,6 @@
 import React from 'react';
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 import styles from '../../styles/modules/blocks/hero.module.scss';
-
 import Menu from '../menu';
 import ArrowDownIcon from '../icons/arrowDownIcon';
 import BackgroundImage from 'gatsby-background-image';
@@ -34,15 +33,24 @@ const Hero = ({attributes}) => {
       <div className={styles.text_area}>
 
         <Menu />
+
+        <div className={styles.text_wrap}>
                   
-        <h1>
-          {attributes.title}
-        </h1>
-        <p
-            dangerouslySetInnerHTML={{
-              __html: attributes.introduction,
-          }}
-        />
+          <h1>
+            {attributes.title}
+          </h1>
+          
+          <p
+              dangerouslySetInnerHTML={{
+                __html: attributes.introduction,
+            }}
+          />
+
+          <Link aria-label="Visit my portfolio" className={styles.button} to="/portfolio">
+              See my work.
+          </Link>
+
+        </div>
 
       </div>  
 
