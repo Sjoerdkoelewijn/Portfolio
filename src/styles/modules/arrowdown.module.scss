@@ -1,5 +1,6 @@
 @import "../variables/colors";
 @import "../variables/animations";
+@import "../variables/breakpoints";
 
 .ArrowDownIcon {
     position:absolute;
@@ -13,4 +14,20 @@
             fill:$white;
         }
     }
+
+    @include small-laptop {
+        left:var(--margin);
+
+        svg {
+            path {
+                fill:$primary;
+            }
+        }
+    }
+
+    @include phone {
+        display:none;
+    }
+
+    
 }
