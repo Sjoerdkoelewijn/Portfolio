@@ -46,7 +46,7 @@ const Hero = ({attributes}) => {
             }}
           />
 
-          <Link aria-label="Visit my portfolio" className={styles.button} to="/portfolio">
+          <Link aria-label="Visit my portfolio" className={styles.button} to="/portfolio/">
               See my work.
           </Link>
 
