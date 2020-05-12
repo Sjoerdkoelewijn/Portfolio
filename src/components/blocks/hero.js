@@ -30,37 +30,45 @@ const Hero = ({attributes}) => {
 
     <article className={styles.hero}>
 
-      <div className={styles.text_area}>
+      <div className={styles.menu_wrap}>
 
         <Menu />
 
-        <div className={styles.text_wrap}>
-                  
-          <h1>
-            {attributes.title}
-          </h1>
-          
-          <p
-              dangerouslySetInnerHTML={{
-                __html: attributes.introduction,
-            }}
-          />
+      </div>
 
-          <Link aria-label="Visit my portfolio" className={styles.button} to="/portfolio/">
-              See my work.
-          </Link>
+      <div className={styles.content_wrap}>
+
+        <BackgroundImage 
+          Tag="section"
+          className={styles.hero_image}
+          fluid={attributes.imageFile.childImageSharp.fluid}
+          backgroundColor={`#CAEFFA`}
+          >
+        </BackgroundImage>
+
+        <div className={styles.text_area}>       
+
+          <div className={styles.text_wrap}>
+                    
+            <h1>
+              {attributes.title}
+            </h1>
+            
+            <p
+                dangerouslySetInnerHTML={{
+                  __html: attributes.introduction,
+              }}
+            />
+
+            <Link aria-label="Visit my portfolio" className={styles.button} to="/portfolio/">
+                See my work.
+            </Link>
+
+          </div>
 
         </div>
 
-      </div>  
-
-      <BackgroundImage 
-        Tag="section"
-        className={styles.hero_image}
-        fluid={attributes.imageFile.childImageSharp.fluid}
-        backgroundColor={`#CAEFFA`}
-        >
-      </BackgroundImage>
+      </div>
 
       <ArrowDownIcon />
 
