@@ -12,6 +12,10 @@
         padding:var(--padding);
         width:calc(100% - ( var(--margin) + var(--padding)));
         box-sizing: border-box;
+
+        @include large-phone {
+            width:100%;
+        }
     }
     
     .content_wrap {
@@ -35,6 +39,7 @@
             @include large-phone {
                 width:100%;
                 min-height:50vh;
+                margin-top:var(--vertical-spacing-m);
             }
     
             h1 {
